@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LukePtv</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+<head>
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />	
+	<% if content_for? :for_head %>
+    	<%= yield :for_head %>
+	<% end %>
+	
+	<%= csrf_meta_tags %>
+	<%= stylesheet_link_tag 'application', media: 'all',
+	'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+	<ul class="nav_links">
+	  <li><a class="nav_item active" href="/setup">Search</a></li>
+	  <li><a class="nav_item" href="#news">News</a></li>
+	  <li><a class="nav_item" href="#contact">Contact</a></li>
+	  <li style="float:right"><a href="#about">About</a></li>
+	</ul>
+	<%= yield %>
+</body>
 </html>
