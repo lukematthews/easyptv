@@ -1,0 +1,173 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.main-content {
+	display: grid;
+    grid-template-areas: 'publicHoliday publicHoliday'
+    'mondayFriday mondayFriday' 
+    'saturday sunday' 
+    'serviceInformation customerInformation' 
+    'traffic traffic';
+    grid-column-gap: 10px;
+    grid-row-gap: 10px; 
+    margin:10px
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.icon {
+  width: 9%;
+}
+
+.ventura-span {
+  width: 100%;
+}
+
+.publicHoliday {
+	grid-area: publicHoliday;
+	border: 1px solid black;
+}
+
+.holidayTimetable {
+	color: red;
+	font-weight: bold
+}
+
+.mondayFriday {
+	grid-area: mondayFriday;
+}
+
+.saturday {
+	grid-area: saturday;
+}
+
+.sunday {
+	grid-area: sunday;
+}
+
+.customerInformation {
+	grid-area: customerInformation;
+	border: 1px solid black;
+	border-spacing: 0px;
+}
+
+.serviceInformation {
+	grid-area: serviceInformation;
+	border: 1px solid black;
+	border-spacing: 0px;
+}
+
+.traffic {
+	grid-area: traffic;
+	background: black;
+}
+
+.day-table {
+    border-right: 1px solid black;
+    border-spacing: 0px;
+}
+
+.bold-text {
+	font-weight: bold;
+	font-size: larger;
+}
+
+.titleTable {
+	width: 100%;
+	border-spacing: 1px;
+}
+
+.times {
+	width: 100%;
+	border-spacing: 0px;
+	border-right: 1px solid black;
+}
+
+.weekend {
+	width: 50%;
+	float: left;
+}
+
+.day {
+	color: white;
+	background-color: black;
+	font-size: x-large;
+	padding: 5px;
+}
+
+.amPm {
+	font-weight: bold;
+}
+
+
+.hour_train {
+	background-color: #68aed0; 
+	text-align: right;
+    border-bottom: 1px solid white;
+}
+
+.hour_tram {
+	background-color: #b7da9b;
+	text-align: right;
+    border-bottom: 1px solid white;
+}
+
+.hour_bus {
+	background-color: #FBC97B;
+	text-align: right;
+    border-bottom: 1px solid white;
+}
+
+.minutes {
+	width: 100%;
+	border-bottom: 1px solid black;
+	border-spacing: 0px;
+}
+
+.stop_bus {
+	padding: 10px;
+	color: white;
+	background: #f7931d;
+	font-size: 28px;
+}
+
+.stop_train {
+	padding: 10px;
+	color: white;
+	background: #008cd0;
+	font-size: 28px;
+}
+.stop_tram {
+	padding: 10px;
+	color: white;
+	background: #72bf44;
+	font-size: 28px;
+}
+
+.stop {
+	padding: 10px;
+	color: white;
+	background: blue;
+	font-size: 28px;
+}
+
+
+.route {
+	padding: 10px;
+	color: white;
+	background: black;
+	font-size: larger;
+	width: 50%;
+}
+
+.destination {
+	padding: 10px;
+	color: white;
+	font-size: larger;
+	background: grey;
+}
