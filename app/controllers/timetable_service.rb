@@ -62,17 +62,24 @@ class TimetableService
 	def loadRouteDetails(route_id)
 		data = run("/v3/routes/#{route_id}?")
 		@routeName = data["route"]["route_name"]
+		@routeTypeId = data["route"]["route_type"]
+		# WTF? Not sure what this was for again.
 		routeNumber = data["route"]["route_number"]
+p routeNumber
+		# "2018-04-24T21:23:00+00:00 - 2018-04-24T11:23:00+00:00 - 2018-04-24 11:23:00 +0000"
+
 
 		# Train: "#{routeName} Line"
 		# Tram: "Route #{routeNumber}"
+p "#{@routeTypeId}"
 	 	case @routeTypeId 
-	 	when "0"
+	 	when 0
 	 		@routeName = "#{@routeName} Line"
-	 	when "1"
+	 	when 1
 	 		@routeName = "Route #{routeNumber}"
-	 	when "2"
-	 		@routeName = "Route #{@routeNumber}"
+	 	when 2
+	 		@routeName = "Route #{routeNumber}"
+p "Setting route name for Bus #{@routeName}"
 	 	end
 	end
 
@@ -151,7 +158,6 @@ class TimetableService
 # well this sucks... date + utc_offset = add utc_offset number of days. sigh.
 #				local = day_data.departureUTC + 36000
 				time = local.to_time
-p "#{day_data.departureUTC} - #{local} - #{time}"
 				# get the DayModel for the day.
 				case local.cwday
 				when 6
@@ -263,7 +269,7 @@ p "#{day_data.departureUTC} - #{local} - #{time}"
 		utc_offset = 10
 		# 11 for AEDT
 		# utc_offset = 11
-		local = departureDate + (utc_offset/24.0)
+		local = departureDate +	 (utc_offset/24.0)
 
 		# local = departureDate + Rational(utc_offset, 86400)
 		local

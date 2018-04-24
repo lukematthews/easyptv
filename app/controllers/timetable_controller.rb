@@ -38,7 +38,7 @@ p @publicHolidays
 	 		@stopClass = "stop_train"
 	 		@hourClass = "hour_train"
 	 		@iconImage = "metro-logo-white.png"
-	 		@routeName = "#{@routeName} Line"
+	 		# @routeName = "#{@routeName} Line"
 	 	when "1"
 	 		@stopClass = "stop_tram"
 	 		@hourClass = "hour_tram"
