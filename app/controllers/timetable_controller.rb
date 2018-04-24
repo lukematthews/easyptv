@@ -30,7 +30,6 @@ class TimetableController < ApplicationController
 		@dayViewModelSUN = days["Sunday"]
 		
 		@publicHolidays = t.publicHolidays
-p @publicHolidays
 		@has_public_holiday = @publicHolidays.length > 0
 
 	 	case @routeTypeId 

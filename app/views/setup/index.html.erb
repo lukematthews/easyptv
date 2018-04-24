@@ -1,0 +1,223 @@
+  <% content_for :for_head do %>
+	
+	<meta name="turbolinks-visit-control" content="reload">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+
+		function changeMode(mode, async) {
+			$("#mode_select").val(mode);
+
+			// async = false: synchronous, that is, the method will not return until it has finished.
+			route_select = $("#route_select");
+			route_select.empty({});
+
+			$.ajax({
+				url: "/setup/"+mode+"/routes", 
+				dataType: 'json',
+				async: async,
+				success: function(result) {
+					var route_select = $("#route_select");
+		        	$.each(result, 
+						function(index, element) 
+						{
+							selected = false
+							if(index == 0) {
+								selected = true
+							}
+							var option = $('<option>', {
+								text: element.display_name
+							});
+							option.val(element.route_id);
+							option.attr("route_name", element.route_name);							
+							option.attr("route_id", element.route_id);
+							if (selected) {
+								option.attr("selected", "selected");
+							}
+							route_select.append(option);
+						}
+					);
+					if (route_select != null) {
+						route_select.val(1);
+						route_select.selectmenu('refresh');
+					}
+				}
+			});
+		}
+
+		function changeRoute(mode, route, async) {
+			if (route == null) {
+				return;
+			}
+			var stop_select = $("#stop_select");
+			stop_select.empty({});
+
+			var selected = "";
+			$.ajax({
+				url: "/stops/"+mode+"?route="+route,
+				dataType: 'json',
+				async: async,
+				success: function(result) {
+		        	$.each(result, 
+						function(index, element) 
+						{
+							var option = $('<option>', {
+								text: element.display_name
+							});
+							option.val(element.stop_id);
+							option.attr("stop_id", element.stop_id);
+							option.attr("stop_name", element.stop_name);
+							stop_select.append(option);
+						}
+					);
+					stop_select.val(1).prop("selected", "selected")
+					stop_select.selectmenu('refresh');
+					// stop_select.val(0).change();
+				}
+			});
+		}
+
+		function changeStop(mode, route, stop) {
+			var direction_select = $("#direction_select");
+			direction_select.empty({});
+
+			$.ajax({
+				url: "/directions/"+route,
+				dataType: 'json',
+				success: function(result) {
+		        	$.each(result, 
+						function(index, element) 
+						{
+							selected = false
+							if(index == 0) {
+								selected = true
+							}
+							var option = $('<option>', {
+								text: element.display_name
+							});
+							option.val(element.direction_id);
+							option.attr("direction_id", element.direction_id);
+							if (selected) {
+								option.attr("selected", "selected");
+							}
+							direction_select.append(option);
+						}
+					);
+					direction_select.selectmenu('refresh');
+					direction_select.val(0);
+				}
+			});
+		}
+
+		function viewTimetable() {
+			// this probably needs to change as tram stop names get built with "#{stop.id} - #{stop.name}"
+			// <option route_name="#{route_name}>#{route.display_name}"</option>
+			// route = $("#route_select  option:selected").attr("route_name");
+			// stop = $("#stop_select option:selected").attr("stop_name");
+			// direction = $('#direction_select').text();
+
+			mode = $("#mode_select").val();
+			route = $("#route_select").val();
+			stop = $("#stop_select").val();
+			direction = $('#direction_select option:selected').val();
+
+			console.log(direction);
+			window.location.replace("/timetable?stop="+stop+"&route_type="+mode+"&route="+route+"&direction="+direction);
+		}
+
+		$( document ).on('turbolinks:load', function() {
+		//$( function() {
+		// jquery code... works on page load.
+
+			// $("#mode_select").addClass("overflow");
+			// $("#route_select").addClass("overflow");
+			// $("#stop_select").addClass("overflow");
+			// $("#direction_select").addClass("overflow");
+
+			var button = $("#timetable_button");
+			button.button();
+			button.button("disable");
+
+			$( "#mode_select" ).selectmenu( {
+				change: function( event, ui ) {
+					// the mode select combo has changed, call the changeMode method to load the new set of routes. true makes it an async ajax call.
+					changeMode($(this).val(), true);
+				}
+			});
+			$( "#route_select" ).selectmenu( {
+				change: function( event, ui ) {
+					// the route select combo has changed, call change route to get all the stops for the route. This also needs the selected mode, so I'll need to work out how to get it.
+
+					// update the stops.
+					// update the directions.
+					mode = $("#mode_select").val();
+					route = $(this).val();
+					changeRoute(mode, route, true);
+				}
+			});
+			$( "#stop_select" ).selectmenu( {
+				change: function( event, ui ) {
+					// update the stops.
+					var mode = $("#mode_select");
+					var selected_mode = mode.val();
+					var route = $("#route_select");
+					var selected_route = route.val();
+					var stop = $("#stop_select");
+					var selected_stop = stop.val();
+					// mode, route, stop
+					changeStop(selected_mode, selected_route, selected_stop);
+				}
+			});
+			$( "#direction_select" ).selectmenu( {
+				change: function( event, ui ) {
+					// we don't need any more json calls to the server anymore.
+
+					// what's the direction?
+
+
+					// enable the timetable button.
+					var button = $("#timetable_button");
+					button.button("enable");
+				}
+			});
+
+			// Select the mode (train), this is synchronous, so the modes will be loaded after the call.
+			mode = $('#mode_select').val();
+			changeMode(mode, false);
+
+			// Get the selected route after the mode was changed.
+			var route = $('#route_select').find(":selected").val();
+ 			changeRoute(mode, route, false);
+
+		});
+
+	</script>
+<% end %>
+
+<div class="demo">
+	<form action="javascript:viewTimetable();"> 
+	  <fieldset>
+	    <label for="mode">Select a mode</label>
+	    <select name="mode" id="mode_select">
+	    	<%
+	    		@modes.each do |mode|
+	    	%>
+	    		<option value="<%= mode.route_type %>"><%= mode.route_type_name %></option>
+	    	<% end %>
+	    </select>
+
+	    <label for="route">Select a route</label>
+	    <select name="route" id="route_select"></select>
+	    
+	    <label for="stop">Select a stop</label>
+	    <select name="stop" id="stop_select"></select>
+
+	    <label for="direction">Select a direction</label>
+	    <select name="direction" id="direction_select"></select>
+
+		<button id="timetable_button">View Timetable</button>
+	   </fieldset>
+	</form>
+</div>
