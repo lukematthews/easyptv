@@ -256,8 +256,16 @@ class TimetableService
 	end
 
 	def getDepartureDateLocal(departureDate)
-		utc_offset = Time.now.localtime.utc_offset
-		local = departureDate + Rational(utc_offset, 86400)
+		# This works if the local time of the server is AET/AEDT
+		# utc_offset = Time.now.localtime.utc_offset
+
+		# 10 for AET
+		utc_offset = 10
+		# 11 for AEDT
+		# utc_offset = 11
+		local = departureDate - (utc_offset/24.0)
+
+		# local = departureDate + Rational(utc_offset, 86400)
 		local
 	end
 end
