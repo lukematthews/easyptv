@@ -151,7 +151,7 @@ class TimetableService
 # well this sucks... date + utc_offset = add utc_offset number of days. sigh.
 #				local = day_data.departureUTC + 36000
 				time = local.to_time
-
+p "#{day_data.departureUTC} - #{local} - #{time}"
 				# get the DayModel for the day.
 				case local.cwday
 				when 6
@@ -263,7 +263,7 @@ class TimetableService
 		utc_offset = 10
 		# 11 for AEDT
 		# utc_offset = 11
-		local = departureDate - (utc_offset/24.0)
+		local = departureDate + (utc_offset/24.0)
 
 		# local = departureDate + Rational(utc_offset, 86400)
 		local
