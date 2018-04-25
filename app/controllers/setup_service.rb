@@ -55,7 +55,7 @@ class SetupService
 			r.display_name = r.to_s
 			routes << r
 		end
-		routes.sort {|x,y| x.to_s <=> y.to_s }
+		routes = routes.sort {|x,y| x.display_name <=> y.display_name }
 		routes
 	end		
 

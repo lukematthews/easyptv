@@ -7,7 +7,7 @@ class Route
     #   "route_number": "57"
     # },
 
-    attr_accessor :route_type, :route_id, :route_name, :route_number, :display_name
+    attr_accessor :display_name, :route_type, :route_id, :route_name, :route_number
 
     def display_name
         to_s

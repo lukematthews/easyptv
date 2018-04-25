@@ -1,13 +1,13 @@
   <% content_for :for_head do %>
 	
 	<meta name="turbolinks-visit-control" content="reload">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
 
 		function changeMode(mode, async) {
+			// Get the value of the mode passed in. (mode is route_type_id)
 			$("#mode_select").val(mode);
 
 			// async = false: synchronous, that is, the method will not return until it has finished.
@@ -23,6 +23,7 @@
 		        	$.each(result, 
 						function(index, element) 
 						{
+							// Select the first item.
 							selected = false
 							if(index == 0) {
 								selected = true
@@ -49,6 +50,7 @@
 
 		function changeRoute(mode, route, async) {
 			if (route == null) {
+				alert("No route... what?");
 				return;
 			}
 			var stop_select = $("#stop_select");
@@ -72,9 +74,7 @@
 							stop_select.append(option);
 						}
 					);
-					stop_select.val(1).prop("selected", "selected")
 					stop_select.selectmenu('refresh');
-					// stop_select.val(0).change();
 				}
 			});
 		}
@@ -87,28 +87,34 @@
 				url: "/directions/"+route,
 				dataType: 'json',
 				success: function(result) {
+					var direction;
 		        	$.each(result, 
 						function(index, element) 
 						{
-							selected = false
-							if(index == 0) {
-								selected = true
-							}
+							if (index == 0) {
+								direction = element.direction_id;
+							}	
 							var option = $('<option>', {
 								text: element.display_name
 							});
 							option.val(element.direction_id);
 							option.attr("direction_id", element.direction_id);
-							if (selected) {
-								option.attr("selected", "selected");
-							}
 							direction_select.append(option);
 						}
 					);
-					direction_select.selectmenu('refresh');
 					direction_select.val(0);
+					direction_select.selectmenu('refresh');
 				}
 			});
+		}
+
+		function changeDirection() {
+			// we don't need any more json calls to the server anymore.
+
+			// enable the timetable button.
+			var button = $("#timetable_button");
+			button.button("enable");
+
 		}
 
 		function viewTimetable() {
@@ -128,19 +134,12 @@
 		}
 
 		$( document ).on('turbolinks:load', function() {
-		//$( function() {
-		// jquery code... works on page load.
-
-			// $("#mode_select").addClass("overflow");
-			// $("#route_select").addClass("overflow");
-			// $("#stop_select").addClass("overflow");
-			// $("#direction_select").addClass("overflow");
 
 			var button = $("#timetable_button");
 			button.button();
 			button.button("disable");
 
-			$( "#mode_select" ).selectmenu( {
+			$("#mode_select").selectmenu( {
 				change: function( event, ui ) {
 					// the mode select combo has changed, call the changeMode method to load the new set of routes. true makes it an async ajax call.
 					changeMode($(this).val(), true);
@@ -172,14 +171,7 @@
 			});
 			$( "#direction_select" ).selectmenu( {
 				change: function( event, ui ) {
-					// we don't need any more json calls to the server anymore.
-
-					// what's the direction?
-
-
-					// enable the timetable button.
-					var button = $("#timetable_button");
-					button.button("enable");
+					changeDirection();
 				}
 			});
 
@@ -190,6 +182,8 @@
 			// Get the selected route after the mode was changed.
 			var route = $('#route_select').find(":selected").val();
  			changeRoute(mode, route, false);
+
+ 			changeDirection();
 
 		});
 
