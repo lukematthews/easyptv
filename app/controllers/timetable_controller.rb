@@ -46,6 +46,14 @@ class TimetableController < ApplicationController
 	 		@stopClass = "stop_bus"
 	 		@hourClass = "hour_bus"
 	 		@iconImage = "ventura white icon.png"
+	 	when "3"
+	 		@stopClass = "stop_vline"
+	 		@hourClass = "hour_vline"
+	 		@iconImage = "vline-logo-white-180x89.png"
+	 	when "4"
+	 		@stopClass = "stop_bus"
+	 		@hourClass = "hour_bus"
+	 		@iconImage = "ventura white icon.png"
 	 	else
 	 		@stopClass = "stop"
 	 	end

@@ -7,7 +7,7 @@
 
 <% content_for :for_head do %>
 	<%= stylesheet_link_tag "timetable" %>
-	<title><%= @routeName %> - <%= @stop %> to <%= @destination%></title>
+	<title><%= @routeName %> - <%= @stop %> - <%= @destination%></title>
 <% end %>
 
 <% 
@@ -38,6 +38,14 @@
 <%
 		end
 	end	
+%>
+
+<% 
+	def noHolidays()
+%>
+	<div class="publicHoliday" style="border:0">	</div>
+<%
+	end
 %>
 
 <% 
@@ -76,10 +84,15 @@
 
 <!-- Public Holidays: For each public holiday print the name, date and timetable in effect-->
 <!-- Are then any public holidays in the next week? If so, list them and what timetable is in effect -->
-<% if @has_public_holiday
-	printHolidays()
+
+<% 
+	if @has_public_holiday
+		printHolidays()
+	else 
+		noHolidays()
+	end 
 %>
-<% end %>
+
 <!-- Monday to Friday -->
 	<div class="mondayFriday">
 		<table class="times">

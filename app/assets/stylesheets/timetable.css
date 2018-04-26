@@ -119,6 +119,11 @@
     border-bottom: 1px solid white;
 }
 
+.hour_vline {
+	background-color: #efe4f4;
+	text-align: right;
+    border-bottom: 1px solid white;
+}
 .minutes {
 	width: 100%;
 	border-bottom: 1px solid black;
@@ -144,6 +149,13 @@
 	background: #72bf44;
 	font-size: 28px;
 }
+.stop_vline {
+	padding: 10px;
+	color: white;
+	background: #782f9a;
+	font-size: 28px;
+}
+/*efe4f4*/
 
 .stop {
 	padding: 10px;
@@ -167,3 +179,4 @@
 	font-size: larger;
 	background: grey;
 }
+/* vline: 782f9a */
