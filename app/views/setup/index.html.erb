@@ -1,5 +1,5 @@
   <% content_for :for_head do %>
-	
+	<title>Easy PTV</title>
 	<meta name="turbolinks-visit-control" content="reload">
 	<script>
 
@@ -11,7 +11,7 @@
 			route_select = $("#route_select");
 			route_select.empty({});
 
-			$.ajax({
+			window.jQuery.ajax({
 				url: "/setup/"+mode+"/routes", 
 				dataType: 'json',
 				async: async,
@@ -37,10 +37,6 @@
 							route_select.append(option);
 						}
 					);
-					if (route_select != null) {
-						route_select.val(1);
-						route_select.selectmenu('refresh');
-					}
 				}
 			});
 		}
@@ -71,7 +67,6 @@
 							stop_select.append(option);
 						}
 					);
-					stop_select.selectmenu('refresh');
 				}
 			});
 		}
@@ -80,7 +75,7 @@
 			var direction_select = $("#direction_select");
 			direction_select.empty({});
 
-			$.ajax({
+			window.jQuery.ajax({
 				url: "/directions/"+route,
 				dataType: 'json',
 				success: function(result) {
@@ -99,8 +94,6 @@
 							direction_select.append(option);
 						}
 					);
-					direction_select.val(0);
-					direction_select.selectmenu('refresh');
 				}
 			});
 		}
@@ -110,8 +103,7 @@
 
 			// enable the timetable button.
 			var button = $("#timetable_button");
-			button.button("enable");
-
+			button.removeAttr("disabled")
 		}
 
 		function viewTimetable() {
@@ -126,50 +118,44 @@
 			stop = $("#stop_select").val();
 			direction = $('#direction_select option:selected').val();
 
-			console.log(direction);
 			window.location.replace("/timetable?stop="+stop+"&route_type="+mode+"&route="+route+"&direction="+direction);
 		}
 
 		$( document ).on('turbolinks:load', function() {
 
-			var button = $("#timetable_button");
-			button.button();
-			button.button("disable");
+// BOOTSTRAP.
+			// var button = $("#timetable_button");
+			// button.attr("disabled", "disabled");
 
-			$("#mode_select").selectmenu( {
-				change: function( event, ui ) {
-					// the mode select combo has changed, call the changeMode method to load the new set of routes. true makes it an async ajax call.
-					changeMode($(this).val(), true);
-				}
-			});
-			$( "#route_select" ).selectmenu( {
-				change: function( event, ui ) {
-					// the route select combo has changed, call change route to get all the stops for the route. This also needs the selected mode, so I'll need to work out how to get it.
+			$("#mode_select").change(function() {
 
-					// update the stops.
-					// update the directions.
-					mode = $("#mode_select").val();
-					route = $(this).val();
-					changeRoute(mode, route, true);
-				}
+				// the mode select combo has changed, call the changeMode method to load the new set of routes. true makes it an async ajax call.
+				changeMode($(this).val(), true);				
 			});
-			$( "#stop_select" ).selectmenu( {
-				change: function( event, ui ) {
-					// update the stops.
-					var mode = $("#mode_select");
-					var selected_mode = mode.val();
-					var route = $("#route_select");
-					var selected_route = route.val();
-					var stop = $("#stop_select");
-					var selected_stop = stop.val();
-					// mode, route, stop
-					changeStop(selected_mode, selected_route, selected_stop);
-				}
+
+			$( "#route_select" ).change(function() {
+				// the route select combo has changed, call change route to get all the stops for the route. This also needs the selected mode, so I'll need to work out how to get it.
+
+				// update the stops.
+				// update the directions.
+				mode = $("#mode_select").val();
+				route = $(this).val();
+				changeRoute(mode, route, true);
 			});
-			$( "#direction_select" ).selectmenu( {
-				change: function( event, ui ) {
-					changeDirection();
-				}
+
+			$( "#stop_select" ).change(function() {
+				// update the stops.
+				var mode = $("#mode_select");
+				var selected_mode = mode.val();
+				var route = $("#route_select");
+				var selected_route = route.val();
+				var stop = $("#stop_select");
+				var selected_stop = stop.val();
+				// mode, route, stop
+				changeStop(selected_mode, selected_route, selected_stop);
+			});
+			$( "#direction_select" ).change(function() {
+				changeDirection();
 			});
 
 			// Select the mode (train), this is synchronous, so the modes will be loaded after the call.
@@ -179,36 +165,55 @@
 			// Get the selected route after the mode was changed.
 			var route = $('#route_select').find(":selected").val();
  			changeRoute(mode, route, false);
-
- 			changeDirection();
-
 		});
 
 	</script>
 <% end %>
 
-<div class="demo">
-	<form action="javascript:viewTimetable();"> 
+<div class="container">
+	<form class="needs-validation" action="javascript:viewTimetable();"> 
 	  <fieldset>
-	    <label for="mode">Select a mode</label>
-	    <select name="mode" id="mode_select">
-	    	<%
-	    		@modes.each do |mode|
-	    	%>
-	    		<option value="<%= mode.route_type %>"><%= mode.route_type_name %></option>
-	    	<% end %>
-	    </select>
+		<div class="form-row">
+    		<div class="col-md-4 mb-3">
+	    		<label for="mode">Select a mode</label>
+	    		<select name="mode" id="mode_select" class="custom-select" required>
+		    	<%
+		    		@modes.each do |mode|
+		    	%>
+		    		<option value="<%= mode.route_type %>"><%= mode.route_type_name %></option>
+		    	<% end %>
+			    </select>
+			</div>
+		</div>
 
-	    <label for="route">Select a route</label>
-	    <select name="route" id="route_select"></select>
+		<div class="form-row">
+    		<div class="col-md-4 mb-3">
+			    <label for="route">Select a route</label>
+			    <select name="route" id="route_select" class="custom-select" required></select>
+			</div>
+		</div>
 	    
-	    <label for="stop">Select a stop</label>
-	    <select name="stop" id="stop_select"></select>
-
-	    <label for="direction">Select a direction</label>
-	    <select name="direction" id="direction_select"></select>
-
-		<button id="timetable_button">View Timetable</button>
+		<div class="form-row">
+    		<div class="col-md-4 mb-3">
+			    <label for="stop">Select a stop</label>
+			    <select name="stop" id="stop_select" class="custom-select" required></select>
+			</div>
+		</div>
+	    
+		<div class="form-row">
+    		<div class="col-md-4 mb-3">
+			    <label for="direction">Select a direction</label>
+	    		<select name="direction" id="direction_select" class="custom-select" required></select>
+			</div>
+			<div class="invalid-feedback">
+				Which way do you want to go? Please select a direction
+			</div>
+		</div>
+	    <div class="form-row">
+    		<div class="col-md-4 mb-3">
+				<button id="timetable_button" type="submit" class="btn btn-primary">View Timetable</button>
+			</div>
+		</div>
 	   </fieldset>
 	</form>
 </div>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
  	get '/timetable/:id', to: 'timetable#index'
 	resources :timetable
+	# get '/timetable/:id', to: 'timetable#index'
 
 	resources :setup do
 		member do
@@ -15,5 +16,5 @@ Rails.application.routes.draw do
 	get '/directions/:id', to: 'setup#directions'
 	get '/bus_operators', to: 'setup#bus_operators'
 
-	get '/timetable/:id', to: 'timetable#index'
+	resources :about
 end
