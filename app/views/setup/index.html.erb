@@ -41,9 +41,100 @@
 			});
 		}
 
+		function changeSelect(mode, route, stop, type, async) {
+// 			if (route == null) {
+// // We need to work out why this is the case. My suspicion is that it is turbolinks related
+// 				return;
+// 			}
+
+			// Parameters:
+			// The current mode
+			// The current route
+			// The current stop
+			// Async... Do we want to the run this load synchronously or not. Synchronous means this function will not return until the data is returned.
+			// Type: "mode", "route", "stop"
+
+			// LOGIC
+			// Create the variable for the select. var select = $("#"+type+"_select");
+
+			// Disable the select to be loaded
+
+			// Empty the select to be loaded.
+			var select = $("#"+type+"_select");
+			select.empty({});
+			select.attr("disabled", true);
+			// Show the loading spinner?
+
+
+			// What are we changing? Mode, Route, Stop or Destination?
+			// if it is the mode, load the routes.
+			// Mode: url: "/setup/"+mode+"/routes",
+
+			// if it is the route, load the stops.
+			// Route: url: "/stops/"+mode+"?route="+route,
+
+			// if it is the stop, load the directions.
+			// Stop: url: "/directions/"+route,
+			var url = "";
+			switch (type) {
+				case "mode":
+					url = "/setup/"+mode+"/routes";
+				case "route":
+					url = "/stops/"+mode+"?route="+route;
+				case "stop":
+					url = "/directions/"+route;
+			}
+
+
+			// Using ajax, load the required data.
+			// so for the url, we need the mode and the route
+
+			// Call the url passing the async parameter.
+
+			$.ajax({
+				url: url,
+				dataType: 'json',
+				async: async,
+				success: function(result) {
+					$.each(result, function(index, element){
+						var option = $('<option>', {
+							text: element.display_name
+						});
+						option.val(element[type+"_id"]);
+						option.attr(type+"_id", element[type+"_id"]);
+						option.attr(type+"_name", element[type+"_name"]);
+						select.append(option);
+					});
+				}
+			});
+
+			// var selected = "";
+			// $.ajax({
+			// 	url: "/stops/"+mode+"?route="+route,
+			// 	dataType: 'json',
+			// 	async: async,
+			// 	success: function(result) {
+		 //        	$.each(result, 
+			// 			function(index, element) 
+			// 			{
+			// 				var option = $('<option>', {
+			// 					text: element.display_name
+			// 				});
+			// 				option.val(element.stop_id);
+			// 				option.attr("stop_id", element.stop_id);
+			// 				option.attr("stop_name", element.stop_name);
+			// 				stop_select.append(option);
+			// 			}
+			// 		);
+			// 	}
+			// });
+		}		
+
 		function changeRoute(mode, route, async) {
 			if (route == null) {
-				alert("No route... what?");
+// We need to work out why this is the case. My suspicion is that it is turbolinks related
+
+// Long story short we haven't been passed a route, so we don't know where to search for stops.
 				return;
 			}
 			var stop_select = $("#stop_select");
@@ -79,7 +170,7 @@
 				url: "/directions/"+route,
 				dataType: 'json',
 				success: function(result) {
-					var direction;
+					var direction; // Do we need this? I don't think so.
 		        	$.each(result, 
 						function(index, element) 
 						{
@@ -107,12 +198,6 @@
 		}
 
 		function viewTimetable() {
-			// this probably needs to change as tram stop names get built with "#{stop.id} - #{stop.name}"
-			// <option route_name="#{route_name}>#{route.display_name}"</option>
-			// route = $("#route_select  option:selected").attr("route_name");
-			// stop = $("#stop_select option:selected").attr("stop_name");
-			// direction = $('#direction_select').text();
-
 			mode = $("#mode_select").val();
 			route = $("#route_select").val();
 			stop = $("#stop_select").val();
@@ -123,7 +208,9 @@
 
 		$( document ).on('turbolinks:load', function() {
 
-			// Leave the button enabled. Ideally, we should have validation.
+			// Disable the destination form for the moment.
+			$("#destination_stop").attr("disabled", true);
+			$("#destination_button").attr("disabled", true);
 
 			$("#mode_select").change(function() {
 
@@ -215,10 +302,14 @@
 				<button id="timetable_button" type="submit" class="btn btn-primary">View Timetable</button>
 			</div>
 		</div>
-<!-- 		<div class="form-row">
+	   </fieldset>
+	</form>
+
+	<form id="destination_form" class="needs-validation" action="javascript:viewTimetable();"> 
+		<div class="form-row">
     		<div class="col-md-4 mb-3">
-			    <label for="direction">So you know which way you're going. Where do you want to get off? (This will give you the travel times on the timetable - and help you pick which is the best one to catch!)</label>
-	    		<select name="direction_stop" id="direction_stop" class="custom-select" required></select>
+			    <label for="destination_stop">So you know which way you're going. Where do you want to get off? (This will give you the travel times on the timetable - and help you pick which is the best one to catch!)</label>
+	    		<select name="destination_stop" id="destination_stop" class="custom-select" required></select>
 			</div>
 			<div class="invalid-feedback">
 				Where do you want to get off?
@@ -226,10 +317,11 @@
 		</div>
 	    <div class="form-row">
     		<div class="col-md-4 mb-3">
-				<button id="timetable_button" type="submit" class="btn btn-primary">View Travel Time - Timetable</button>
+				<button id="destination_button" type="submit" class="btn btn-primary">View Travel Time - Timetable</button>
 			</div>
 		</div>
- -->
-	   </fieldset>
+
 	</form>
+
+
 </div>
