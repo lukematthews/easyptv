@@ -123,9 +123,7 @@
 
 		$( document ).on('turbolinks:load', function() {
 
-// BOOTSTRAP.
-			// var button = $("#timetable_button");
-			// button.attr("disabled", "disabled");
+			// Leave the button enabled. Ideally, we should have validation.
 
 			$("#mode_select").change(function() {
 
@@ -165,6 +163,9 @@
 			// Get the selected route after the mode was changed.
 			var route = $('#route_select').find(":selected").val();
  			changeRoute(mode, route, false);
+
+			changeStop(mode, route, null);
+
 		});
 
 	</script>
@@ -214,6 +215,21 @@
 				<button id="timetable_button" type="submit" class="btn btn-primary">View Timetable</button>
 			</div>
 		</div>
+<!-- 		<div class="form-row">
+    		<div class="col-md-4 mb-3">
+			    <label for="direction">So you know which way you're going. Where do you want to get off? (This will give you the travel times on the timetable - and help you pick which is the best one to catch!)</label>
+	    		<select name="direction_stop" id="direction_stop" class="custom-select" required></select>
+			</div>
+			<div class="invalid-feedback">
+				Where do you want to get off?
+			</div>
+		</div>
+	    <div class="form-row">
+    		<div class="col-md-4 mb-3">
+				<button id="timetable_button" type="submit" class="btn btn-primary">View Travel Time - Timetable</button>
+			</div>
+		</div>
+ -->
 	   </fieldset>
 	</form>
 </div>
