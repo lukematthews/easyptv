@@ -140,7 +140,9 @@
 			var stop_select = $("#stop_select");
 			stop_select.empty({});
 
-			var selected = "";
+			var destination_select = $("#destination_stop");
+			destination_select.empty({});
+
 			$.ajax({
 				url: "/stops/"+mode+"?route="+route,
 				dataType: 'json',
@@ -149,13 +151,22 @@
 		        	$.each(result, 
 						function(index, element) 
 						{
-							var option = $('<option>', {
+							var stop_option = $('<option>', {
 								text: element.display_name
 							});
-							option.val(element.stop_id);
-							option.attr("stop_id", element.stop_id);
-							option.attr("stop_name", element.stop_name);
-							stop_select.append(option);
+							stop_option.val(element.stop_id);
+							stop_option.attr("stop_id", element.stop_id);
+							stop_option.attr("stop_name", element.stop_name);
+							stop_select.append(stop_option);
+
+							var destination_option = $('<option>', {
+								text: element.display_name
+							});
+							destination_option.val(element.stop_id);
+							destination_option.attr("stop_id", element.stop_id);
+							destination_option.attr("stop_name", element.stop_name);
+							destination_select.append(destination_option);
+
 						}
 					);
 				}
