@@ -21,6 +21,35 @@ class TimetableController < ApplicationController
 
 		t = TimetableService.new
 		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
+
+		setTimes(t, days)
+
+		setPageClasses()
+
+
+		render 
+	end
+
+	def withDepartures
+		@routeTypeId = params[:route_type]
+		@routeId = params[:route]
+		@stopId = params[:stop]
+		@directionId = params[:direction]
+		@destination = params[:destination]
+
+		t = TimetableService.new
+		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
+
+		setTimes(t, days)
+
+		setPageClasses()
+
+		render
+	end
+
+
+# Create all the variables for the timetable page from TimetableService and the days created
+	def setTimes(t, days)
 		@routeName = t.routeName
 		@destination = t.directionName
 		@stop = t.stopName
@@ -31,13 +60,14 @@ class TimetableController < ApplicationController
 		
 		@publicHolidays = t.publicHolidays
 		@has_public_holiday = @publicHolidays.length > 0
+	end
 
+	def setPageClasses()
 	 	case @routeTypeId 
 	 	when "0"
 	 		@stopClass = "stop_train"
 	 		@hourClass = "hour_train"
 	 		@iconImage = "metro-logo-white.png"
-	 		# @routeName = "#{@routeName} Line"
 	 	when "1"
 	 		@stopClass = "stop_tram"
 	 		@hourClass = "hour_tram"
@@ -54,10 +84,6 @@ class TimetableController < ApplicationController
 	 		@stopClass = "stop_bus"
 	 		@hourClass = "hour_bus"
 	 		@iconImage = "ventura white icon.png"
-	 	else
-	 		@stopClass = "stop"
 	 	end
-
-		render 
 	end
 end

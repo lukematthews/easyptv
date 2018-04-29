@@ -101,6 +101,19 @@ p "Setting route name for Bus #{@routeName}"
 		@stopName = data["stop"]["stop_name"]
 	end
 
+	def loadDeparturesToStop(route_type, route_id, stop, direction_id, end_stop)
+		# Once we get the departures, we can load the patterns for each departure (run), 
+		# this will give us the time the run will be stopping there.
+
+		# I guess we will need to load the run/arrival time into TimeModel.
+		# Time: 43 min
+		# Arrival @ <Stop>: hh:mm
+
+		# Do we want to exclude the time or highlight it in another colour 
+		# if the service doesn't stop at the end stop?
+	end
+
+
 	#"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
 	def loadDepartures(route_type, route_id, stop, direction_id)
 
@@ -144,12 +157,9 @@ p "Setting route name for Bus #{@routeName}"
 			# 	# Load the days timetable and load it into the departures array
 				@deps.departures << loadDay(dayToLoad)
 			end
-
 		end
 
-
 		days = Hash.new
-
 		# days {"M_F" times {hour, [minutes]}], "SAT"..., "SUN"...}
 		# iterate through all the departures...
 		@deps.departures.each do |day|
@@ -274,6 +284,7 @@ p "Setting route name for Bus #{@routeName}"
 		# local = departureDate + Rational(utc_offset, 86400)
 		local
 	end
+
 end
 
 # Formatting the way the sets print

@@ -1,0 +1,142 @@
+<% 
+	am = "AM"
+	pm = "PM"
+	amHours = (5..11).to_a
+	pmHours = (12..22).to_a 
+%>
+
+<% content_for :for_head do %>
+	<%= stylesheet_link_tag "timetable" %>
+	<title><%= @routeName %> - <%= @stop %> - <%= @destination%></title>
+<% end %>
+
+<% 
+	def print_times(amPm, hours, dayModel)
+%>
+		<tr><td class="<%= @hourClass %> amPm"><%= amPm %></td><td class="minutes"/></tr>
+<%
+		hours.each do |hour|
+			style = ""
+			if(dayModel.last_hour(hour))
+				style = "border-bottom: 1px solid black;"
+				# style = "#{style} background-color:rgb(8, 199, 304);"
+			end
+%>
+			<tr>
+				<td class="<%= @hourClass %>" style="<%= style %>" > <%= dayModel.display_hour(hour)%> </td>
+				<td class="minutes">
+<%
+					minutes = dayModel.minutes_for_hour(hour)
+					minutes.each do |minute|
+%>
+						<span style="margin-left:10px;"><%= minute %></span>
+<%				
+					end
+%>
+				</td>
+			</tr>
+<%
+		end
+	end	
+%>
+
+<% 
+	def noHolidays()
+%>
+	<div class="publicHoliday" style="border:0">	</div>
+<%
+	end
+%>
+
+<% 
+	def printHolidays()
+%>
+	<div class="publicHoliday">
+		<div class="day">Public Holidays in the next week</div>
+		<% @publicHolidays.each{ |value| 
+		# key = date
+		# value[0] = Holiday name
+		# value[1] = timetable in effect
+		p value
+			%>
+			<div style="padding:2px;">
+				<p style="margin:2px"><%= value[0] %> (<%= value[1].strftime("%A, %B %e %Y") %>): <span class="holidayTimetable"><%= value[2] %> timetable</span></p></div>
+		<% } %>
+	</div>
+<%
+	end
+%>
+<table class="titleTable">
+	<tr>
+		<td colspan=2 class="<%= @stopClass %>">
+			<div class="wrapper">
+				<span class="ventura-span"><%= image_tag @iconImage, class: "icon" %></span>
+				<%= image_tag "ptv white icon.png", class: "icon" %>
+			</div>
+		</td>
+	</tr>
+	<tr><td class="<%= @stopClass %>" colspan=2><%= @stop %></td></tr>
+	<tr><td class="route"><%= @routeName %></td><td class="destination"><%= @destination %></td></tr>
+</table>
+<!-- Inset the body content 10px from the titles -->
+<div class="main-content">
+
+<!-- Public Holidays: For each public holiday print the name, date and timetable in effect-->
+<!-- Are then any public holidays in the next week? If so, list them and what timetable is in effect -->
+
+<% 
+	if @has_public_holiday
+		printHolidays()
+	else 
+		noHolidays()
+	end 
+%>
+
+<!-- Monday to Friday -->
+	<div class="mondayFriday">
+		<table class="times">
+			<tr class="day"><td colspan=2 style="padding: 2px;"><%= @dayViewModelMF.name %></td></tr>
+			<% print_times(am, amHours, @dayViewModelMF ) %>
+			<% print_times(pm, pmHours, @dayViewModelMF ) %>
+		</table>
+	</div>
+
+<!-- Saturday -->
+	<div class="saturday,day,weekend">
+		<table class="times">
+			<tr class="day"><td colspan=2 style="padding: 2px;"><%= @dayViewModelSAT.name %></td></tr>
+			<% 
+				print_times(am, amHours, @dayViewModelSAT)
+				print_times(pm, pmHours, @dayViewModelSAT)
+			%>
+		</table>
+	</div>
+
+<!-- Sunday -->
+	<div class="sunday,day,weekend">
+		<table class="times">
+			<tr class="day"><td colspan=2 style="padding: 2px;"><%= @dayViewModelSUN.name %></td></tr>
+			<% 
+				print_times(am, amHours, @dayViewModelSUN)
+				print_times(pm, pmHours, @dayViewModelSUN)
+			%>
+		</table>
+	</div>
+<!-- Service Information -->
+	<div class="serviceInformation">
+		<div class="day">Service Information</div>
+		<div><p style="margin:2px">All services are operated by wheelchair accessible vehicles (other than exceptional circumstances)</p>
+<p style="margin:2px">(1) Saturday timetable operates on all public holidays except Good Friday and Christmas Day<br/>
+(2) Sunday timetable operates on Good Friday and Christmas Day<br/>
+All times are subject to alteration without notice.</p>
+		</div>
+	</div>
+	<div class="customerInformation">
+		<div class="day">Customer Information</div>
+		<div style="padding:2px;"><p style="margin:2px">For more information or to give feedback visit
+<span class="bold-text">ptv.vic.gov.au</span> or call <span class="bold-text">1800 800 007</span></p>
+<p style="margin:2px">Effective as of 27 August 2017</p></div>
+	</div>
+	<div class="traffic day">These times are subject to road and traffic conditions
+	</div>
+</div>

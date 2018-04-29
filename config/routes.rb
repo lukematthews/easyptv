@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	root 'setup#index'
 
- 	get '/timetable/:id', to: 'timetable#index'
 	resources :timetable
-	# get '/timetable/:id', to: 'timetable#index'
+	get '/arrivals', to: 'timetable#withDepartures'
 
 	resources :setup do
 		member do
