@@ -130,6 +130,11 @@
 	border-spacing: 0px;
 }
 
+.minutes_span {
+	margin-left: 10px;
+	cursor: pointer;
+}
+
 .stop_bus {
 	padding: 10px;
 	color: white;

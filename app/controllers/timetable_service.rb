@@ -11,6 +11,7 @@ class TimetableService
 
 	require_relative '../models/json/departure_model'
 	require_relative '../models/json/departures_model'
+	require_relative '../models/json/pattern_model'
 
 	@route_type
 	@stop
@@ -65,13 +66,9 @@ class TimetableService
 		@routeTypeId = data["route"]["route_type"]
 		# WTF? Not sure what this was for again.
 		routeNumber = data["route"]["route_number"]
-p routeNumber
-		# "2018-04-24T21:23:00+00:00 - 2018-04-24T11:23:00+00:00 - 2018-04-24 11:23:00 +0000"
-
 
 		# Train: "#{routeName} Line"
 		# Tram: "Route #{routeNumber}"
-p "#{@routeTypeId}"
 	 	case @routeTypeId 
 	 	when 0
 	 		@routeName = "#{@routeName} Line"
@@ -96,9 +93,13 @@ p "Setting route name for Bus #{@routeName}"
 		end
 	end
 
-	def loadStopName(route_type, stop)
+	def getStopName(route_type, stop)
 		data = run("/v3/stops/#{stop}/route_type/#{route_type}?")
-		@stopName = data["stop"]["stop_name"]
+		data["stop"]["stop_name"]
+	end
+
+	def loadStopName(route_type, stop)
+		@stopName = getStopName(route_type, stop)
 	end
 
 	def loadDeparturesToStop(route_type, route_id, stop, direction_id, end_stop)
@@ -111,12 +112,54 @@ p "Setting route name for Bus #{@routeName}"
 
 		# Do we want to exclude the time or highlight it in another colour 
 		# if the service doesn't stop at the end stop?
+
+		# If we load the run_id into a set, we can load the patterns and determine 
+		# what time the run gets to the end_stop. To make sure we don't load too many patterns,
+		# store the run_id's into a set and only load the distinct runs/patterns
+
+		days = loadAll(route_type, route_id, stop, direction_id, end_stop, true)
+		# @deps.departures.each do | dep |
+		# 	# day has an array of departures...
+		# 	dep.each do | departure |
+		# 		loadTimesForRun(departure, end_stop)
+		# 	end
+		# end
+		days
+	end
+
+	def loadTimesForRun(departure, destination)
+		# For each departure, get the run_id, add it to a set.
+		# CRAP. It looks like each departure has its own run. grr. 
+		# (This has the logic of accurate departure times though)
+
+		# GET /v3/pattern/run/{run_id}/route_type/{route_type}
+
+		# route_type_pattern = "route_type/#{@route_type}"
+		# run_pattern = "run/#{departure.run_id}"
+
+		# uri = "/v3/pattern/#{run_pattern}/#{route_type_pattern}?"
+		# data = run(uri)
+		# # This set of departures is for the pattern.
+		# data['departures'].map { |dep|
+		# 	if dep['stop_id'] == destination
+		# 		# Load the time into the time model
+		# 		arrival = dep['scheduled_departure_utc']
+				
+		# 		# We have the departure. That is where we got the run_id from :)
+		# 		# Calculate the difference in time.
+
+		# 		# And store it back into the day model.
+		# 	end
+		# }
 	end
 
 
 	#"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
 	def loadDepartures(route_type, route_id, stop, direction_id)
+		loadAll(route_type, route_id, stop, direction_id, 0, false)
+	end
 
+	def loadAll(route_type, route_id, stop, direction_id, destination, loadTimes)
 		@route_type = route_type
 		@stop = stop
 		@direction_id = direction_id
@@ -133,10 +176,16 @@ p "Setting route name for Bus #{@routeName}"
 		loadDirectionDetails(route_type, route_id, direction_id)
 		
 # Get the stop name for the stop id.
-		loadStopName(route_type, stop)
+		stop = getStopName(route_type, stop)
+		@stopName = stop
 
 		#  For the next 7 days (week)
 		now = Date.today
+
+		# Public holidays.
+		# 	Is the day being loaded a public holiday?
+		# 	If so, what is the holiday name and what timetable is in effect?
+		# 	Do not load the departure into the new departures array. UNLESS... The day is a Saturday or Sunday, in which case, we want the times.
 
 		@deps.departures = []
 		(1..7).to_a.each do |day|
@@ -154,7 +203,7 @@ p "Setting route name for Bus #{@routeName}"
 			# If its not a public holiday, add it.
 			# Or, if it's a SAT/SUN and a public holiday, add it. 
 			if (!isPublicHoliday || (isPublicHoliday && sat_or_sun))
-			# 	# Load the days timetable and load it into the departures array
+				# Load the days timetable and load it into the departures array
 				@deps.departures << loadDay(dayToLoad)
 			end
 		end
@@ -165,8 +214,7 @@ p "Setting route name for Bus #{@routeName}"
 		@deps.departures.each do |day|
 			day.each do |day_data|
 				local = getDepartureDateLocal(day_data.departureUTC)
-# well this sucks... date + utc_offset = add utc_offset number of days. sigh.
-#				local = day_data.departureUTC + 36000
+
 				time = local.to_time
 				# get the DayModel for the day.
 				case local.cwday
@@ -181,7 +229,8 @@ p "Setting route name for Bus #{@routeName}"
 				time_model = TimeModel.new
 				time_model.hour = time.hour
 				time_model.minutes = time.min
-				
+				time_model.run_id = day_data.run_id
+
 				day_model = days[day_name]
 				if day_model.nil?
 					day_model = DayModel.new
@@ -192,11 +241,25 @@ p "Setting route name for Bus #{@routeName}"
 				if (times.nil?)
 					times = SortedSet.new
 				else
-					# This feels really unnatural
+					# This feels really unnatural - sorted set works on object instance,
+					# using a to_s which only has the time in it allows it to work
+
+					# This effectively serializes the time model as a string 
+					# so that it can be unique and sorted
+
+					# HOW DO I ADD THE RUN ID FROM THE DEPARTURE INTO THIS?
+					# MAYBE A HASH WITH THE TIMES MAPPED TO THE RUN_ID's?
+
 					times.add(time_model.to_s)
 				end
 				day_model.times = times
 				days[day_name] = day_model
+
+				if (day_model.runs[time_model.to_s].nil?)
+					day_model.runs[time_model.to_s] = SortedSet.new
+				end
+				day_model.runs[time_model.to_s] << day_data.run_id
+p "runs: #{day_model.runs}"
 			end
 		end
 
@@ -226,11 +289,6 @@ p "Setting route name for Bus #{@routeName}"
 
 	def loadDay(date)
 
-# Public holidays.
-# 	Is the day being loaded a public holiday?
-# 	If so, what is the holiday name and what timetable is in effect?
-# 	Do not load the departure into the new departures array. UNLESS... The day is a Saturday or Sunday, in which case, we want the times.
-
 		formattedDate = CGI::escape(date.strftime("%Y-%m-%dT00:00"))
 		route_type_pattern = "route_type/#{@route_type}"
 		stop_pattern = "stop/#{@stop}"
@@ -239,19 +297,12 @@ p "Setting route name for Bus #{@routeName}"
 
 		uri = "/v3/departures/#{route_type_pattern}/#{stop_pattern}?#{direction_pattern}&#{date_pattern}&"
 
-# p uri
-# uri = "/v3/departures/route_type/#{@route_type}/stop/#{@stop}?date_utc=#{formattedDate}&direction_id=#{@direction_id}"
-# /v3/departures/route_type/2/stop/12400?date_utc=2018-04-12T00:00&direction_id=220
-# add this after the signature has been created "&devid=3000522&signature=84FFBF8344A992DC3D45081C30632077BC97A9AC"
-
 		# This is calling module methods
 		# data = parsed_json(execute(uri))
 		data = run(uri)
 
 		newDepartures = []
 
-# Not needed... run() parses the json now.
-		# data = JSON.parse(data)
 		data['departures'].map { |dep|
 			if dep['route_id'] == @route_id
 				d = Departure.new
@@ -271,6 +322,141 @@ p "Setting route name for Bus #{@routeName}"
 		@deps.departures
 	end
 
+	def loadTimes(route_type, startStop, endStop, runs)
+
+		# Runs is a comma separated id list... make it an array...
+		runs = runs.split(", ")
+p runs
+# Desired page text:
+# Departing is from the page (cell that launched the request)
+# All the rest comes from the pattern API
+
+# Departing: 3:34
+# Taking 00:15 - 00:17
+# Arriving between: 3:49 - 3:51
+
+		departure = Time.new
+		earliest_arrival = Date.new
+		latest_arrival = Date.new
+		min_duration = 0
+		max_duration = 0
+
+		# times...	{ :run_id => [:start, :end, :trip_length, :arrival]
+		# 			}
+		times = Hash.new {}
+		runs.each_with_index() do |run,index|
+			run_times = processRun(route_type, startStop, endStop, run)
+
+			if index == 0
+				departure = run_times[0]
+				earliest_arrival = run_times[1]
+				latest_arrival = run_times[1]
+				min_duration = run_times[2]
+				max_duration = run_times[2]
+			else 
+				# Departure time is the earliest departure time.
+				# run_times[0] < departure ? departure = run_times[0]
+				departure = run_times[0] < departure ? run_times[0] : departure
+
+				run_times[1] < earliest_arrival ? earliest_arrival = run_times[1] : earliest_arrival
+				run_times[1] > latest_arrival ? latest_arrival = run_times[1] : latest_arrival
+
+				run_times[2] < min_duration ? min_duration = run_times[2] : min_duration
+				run_times[2] > max_duration ? max_duration = run_times[2] : max_duration
+			end
+			p "(departure) #{departure}"
+			p "(earliest_arrival) #{earliest_arrival}"
+			p "(latest_arrival) #{latest_arrival}"
+			p "(min_duration) #{min_duration}"
+			p "(max_duration) #{max_duration}"
+
+			times[run] = run_times
+		end
+
+		# trip_length = seconds(as a rational), convert it into a hh:mm string
+		# if trip length
+		trip_length = Time.at(86400 * trip_length.to_f).utc.strftime("%H hours %M min")
+
+
+		# Pattern is the object to be returned in json.
+		travel_time = PatternModel.new
+
+		# Departure time:
+		travel_time.departure = departure.strftime("%l:%M%P")
+		# travel_time.departure = departure.to_s 
+
+		# Convert it to "hh hours mm minutes" or "mm minutes" if less than an hour.
+		if min_duration == max_duration
+			travel_time.duration = format_duration(min_duration)
+		else
+			travel_time.min_duration = format_duration(min_duration)
+			travel_time.max_duration = format_duration(max_duration)
+		end
+
+		if travel_time.earliest_arrival == travel_time.latest_arrival
+			travel_time.arrival = earliest_arrival.strftime("%l:%M%P")
+		else
+			travel_time.earliest_arrival = earliest_arrival.strftime("%l:%M%P")
+			travel_time.latest_arrival = latest_arrival.strftime("%l:%M%P")
+		end
+
+		travel_time
+	end
+
+	def format_duration(duration)
+		seconds = 86400*duration
+		one_hour = 60*60
+		time = Time.at(seconds).utc
+		# Is the duration less than an hour?
+		if (seconds < one_hour) 
+			time.strftime("%-M minutes")		
+		elsif (seconds < one_hour + 60)
+			time.utc.strftime("%-H hour")
+		elsif seconds < one_hour + (60*2)
+			time.utc.strftime("%-H hour %-M minute")
+		else
+			time.strftime("%-H hours %-M minutes")		
+		end
+	end
+	
+	def processRun(route_type, startStop, endStop, run)
+		# Load the pattern.
+		uri = "/v3/pattern/run/#{run}/route_type/#{route_type}?"
+		data = run(uri)
+
+		start_time = Date.new.to_s		
+		end_time = Date.new.to_s
+
+		# Iterate over the departures, looking for the stops. 
+		# Capture the departures for the start and end stop.
+		data['departures'].map { |dep|
+			time = dep['scheduled_departure_utc']
+			stop = dep['stop_id'].to_i
+			if stop == startStop.to_i
+				# Capture the start time of the pattern
+				start_time = time
+			elsif stop == endStop.to_i
+				# Capture the end time of the pattern
+				end_time = time
+			end
+		}
+
+		# Get the local times of both the start and the end times.
+		start_time = getDateFromLocalString(start_time)
+p end_time
+		end_time = getDateFromLocalString(end_time)
+
+		# end_time - start_time = number of seconds difference as a rational.
+		# eg 1/240 = 86400 * (1/240) = 362.88 = 00:06, which is the trip length.
+		trip_length = end_time - start_time # This is a rational fraction of the day. 6 min = 1/240
+		stats = [start_time, end_time, trip_length]
+	end
+
+	def getDateFromLocalString(departure_date)
+		d = DateTime.parse(departure_date)
+		getDepartureDateLocal(d)
+	end
+
 	def getDepartureDateLocal(departureDate)
 		# This works if the local time of the server is AET/AEDT
 		# utc_offset = Time.now.localtime.utc_offset
@@ -279,9 +465,8 @@ p "Setting route name for Bus #{@routeName}"
 		utc_offset = 10
 		# 11 for AEDT
 		# utc_offset = 11
-		local = departureDate +	 (utc_offset/24.0)
 
-		# local = departureDate + Rational(utc_offset, 86400)
+		local = departureDate +	 (utc_offset/24.0)
 		local
 	end
 

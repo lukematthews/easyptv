@@ -35,10 +35,14 @@ class TimetableController < ApplicationController
 		@routeId = params[:route]
 		@stopId = params[:stop]
 		@directionId = params[:direction]
+		# Destination is the stop id of where the arrival times and trip length are calculated to.
 		@destination = params[:destination]
-
+		@end_stop_id = params[:destination]
 		t = TimetableService.new
-		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
+		
+		@end_stop = t.getStopName(@routeTypeId, @destination)
+
+		days = t.loadDeparturesToStop(@routeTypeId, @routeId, @stopId, @directionId, @end_stop)
 
 		setTimes(t, days)
 
@@ -47,9 +51,23 @@ class TimetableController < ApplicationController
 		render
 	end
 
+	def loadTimes
+		route_type_id = params[:route_type]
+		# @run_id = params[:run_id]
+		start_stop_id = params[:start_stop]
+		end_stop_id = params[:end_stop]
+		runs = params[:runs]
+		# runs is a comma separated list of run_id's
+		t = TimetableService.new
+		times = t.loadTimes(route_type_id, start_stop_id, end_stop_id, runs)
+		render json: times
+	end
 
 # Create all the variables for the timetable page from TimetableService and the days created
+# t = TimetableService
+# days = [{"Day Key", [DayModel...]}]
 	def setTimes(t, days)
+
 		@routeName = t.routeName
 		@destination = t.directionName
 		@stop = t.stopName
@@ -60,6 +78,7 @@ class TimetableController < ApplicationController
 		
 		@publicHolidays = t.publicHolidays
 		@has_public_holiday = @publicHolidays.length > 0
+
 	end
 
 	def setPageClasses()

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 	resources :timetable
 	get '/arrivals', to: 'timetable#withDepartures'
+	get '/times', to: 'timetable#loadTimes'
 
 	resources :setup do
 		member do

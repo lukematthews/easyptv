@@ -217,14 +217,24 @@
 			window.location.replace("/timetable?stop="+stop+"&route_type="+mode+"&route="+route+"&direction="+direction);
 		}
 
+		function viewTimetableForDestination() {
+			mode = $("#mode_select").val();
+			route = $("#route_select").val();
+			stop = $("#stop_select").val();
+			direction = $('#direction_select option:selected').val();
+			destination = $('#destination_stop option:selected').val();
+
+			window.location.replace("/arrivals?stop="+stop+"&route_type="+mode+"&route="+route+"&direction="+direction+"&destination="+destination);
+		}
+
+
 		$( document ).on('turbolinks:load', function() {
 
 			// Disable the destination form for the moment.
-			$("#destination_stop").attr("disabled", true);
-			$("#destination_button").attr("disabled", true);
+			// $("#destination_stop").attr("disabled", true);
+			// $("#destination_button").attr("disabled", true);
 
 			$("#mode_select").change(function() {
-
 				// the mode select combo has changed, call the changeMode method to load the new set of routes. true makes it an async ajax call.
 				changeMode($(this).val(), true);				
 			});
@@ -316,7 +326,7 @@
 	   </fieldset>
 	</form>
 
-	<form id="destination_form" class="needs-validation" action="javascript:viewTimetable();"> 
+	<form id="destination_form" class="needs-validation" action="javascript:viewTimetableForDestination();"> 
 		<div class="form-row">
     		<div class="col-md-4 mb-3">
 			    <label for="destination_stop">So you know which way you're going. Where do you want to get off? (This will give you the travel times on the timetable - and help you pick which is the best one to catch!)</label>

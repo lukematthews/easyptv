@@ -8,6 +8,63 @@
 <% content_for :for_head do %>
 	<%= stylesheet_link_tag "timetable" %>
 	<title><%= @routeName %> - <%= @stop %> - <%= @destination%></title>
+	<script>
+		$(document).ready(function() {
+
+			// Configure the modal to show the travel time information.
+			$('#exampleModal').on('show.bs.modal', function (event) {
+				var time = $(event.relatedTarget).attr("data-time");
+				var runs = $(event.relatedTarget).attr("data-run_id");
+
+				loadRuns($(this), time, runs);
+			});
+
+			function loadRuns(modal, time, runs) {
+				var route_type_id = $("#page_data").attr("data-route_type");
+				var start_stop = $("#page_data").attr("data-start_stop");
+				var end_stop = $("#page_data").attr("data-end_stop");
+
+				window.jQuery.ajax({
+					url: "/times?route_type="+route_type_id+"&start_stop="+start_stop+"&end_stop="+end_stop+"&runs="+runs,
+					dataType: 'json',
+					success: function(result) {
+						var departing = "Departing "+result.departure;
+
+						var min_duration = result.min_duration;
+						var max_duration = result.max_duration;
+						var duration = "Taking ";
+						if (min_duration == max_duration) {
+							duration =  result.duration
+						} else {
+							duration = result.min_duration + " - " + result.max_duration;
+						}
+
+						var earliest_arrival = result.earliest_arrival;
+						var latest_arrival = result.latest_arrival;
+						
+						var arriving = "Arriving ";
+						if (earliest_arrival == latest_arrival) {
+							arriving = arriving + "at " + result.arrival;
+						} else {
+							arriving = arriving + "between "+earliest_arrival+" - "+latest_arrival;
+						}
+
+						var from = $("#stop_name").text();
+						var to = $("#end_stop_name").text();
+						var title = result.departure+" "+from+" to "+to;
+
+						modal.find('.modal-title').text(title);
+						modal.find('.modal-body').html(
+							"<p>"+arriving+" ("+duration+")</p>");
+
+						// # Departing: 3:34pm
+						// # Taking 00:15 - 00:17 minutes
+						// # Arriving between: 3:49pm - 3:51pm
+					}
+				});
+			}
+		});
+	</script>
 <% end %>
 
 <% 
@@ -29,7 +86,7 @@
 					minutes = dayModel.minutes_for_hour(hour)
 					minutes.each do |minute|
 %>
-						<span style="margin-left:10px;"><%= minute %></span>
+						<span class="minutes_span" data-toggle="modal" data-target="#exampleModal" class="modal_link" data-time="<%= dayModel.display_hour(hour)%>:<%= minute %><%= amPm %>" data-run_id="<%= dayModel.runForTime(hour, minute) %>"><%= minute %></span>
 <%				
 					end
 %>
@@ -57,7 +114,6 @@
 		# key = date
 		# value[0] = Holiday name
 		# value[1] = timetable in effect
-		p value
 			%>
 			<div style="padding:2px;">
 				<p style="margin:2px"><%= value[0] %> (<%= value[1].strftime("%A, %B %e %Y") %>): <span class="holidayTimetable"><%= value[2] %> timetable</span></p></div>
@@ -66,6 +122,39 @@
 <%
 	end
 %>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page_data" style="display:none" 
+	data-route_type="<%= @routeTypeId %>"
+	data-start_stop="<%= @stopId %>"
+	data-end_stop="<%= @end_stop_id %>">
+
+</div>
+
 <table class="titleTable">
 	<tr>
 		<td colspan=2 class="<%= @stopClass %>">
@@ -75,7 +164,7 @@
 			</div>
 		</td>
 	</tr>
-	<tr><td class="<%= @stopClass %>" colspan=2><%= @stop %></td></tr>
+	<tr><td class="<%= @stopClass %>" colspan=2><span id="stop_name"><%= @stop %></span> to <span id="end_stop_name"><%= @end_stop %></span></td></tr>
 	<tr><td class="route"><%= @routeName %></td><td class="destination"><%= @destination %></td></tr>
 </table>
 <!-- Inset the body content 10px from the titles -->

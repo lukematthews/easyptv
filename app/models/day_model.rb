@@ -7,10 +7,13 @@ class DayModel
 	@name
 	@times
 
+	@runs
+
 	def initialize
 		@name = ""
 		@key_names = {"Monday to Friday"=>"MF", "Saturday"=>"SAT", "Sunday"=>"SUN"}
 		@times = Set.new
+		@runs = {}
 	end
 
 
@@ -21,6 +24,15 @@ class DayModel
 
 	def times=(new_times)
 		@times = new_times
+	end
+
+	def runs=(runs)
+		# runs = {time.to_s => [run_id, run_id]}
+		@runs = runs
+	end
+
+	def runs
+		@runs
 	end
 
 	def times
@@ -63,13 +75,11 @@ class DayModel
 		hour == max_hour
 	end
 
+	# Return an array of minutes for the hour.
 	def minutes_for_hour(hour)
 		minutes = []
 		hour_times = times_for_hour(hour)
 		hour_times.each do |time|
-			# time_minutes = time.split(":")[1]
-			# minutes << time_minutes
-			
 			minutes << time			
 		end
 		minutes
@@ -80,5 +90,14 @@ class DayModel
 			hour -= 12
 		end
 		hour
+	end
+
+	def runForTime(hour, minute)
+		key = "#{hour}:#{minute}"
+		time_runs = @runs[key]
+		 # ALL RUNS FOR DAY: #{@runs} 
+p "KEY: #{key} RUNS FOR TIME: #{time_runs}"
+p "RUNS: #{time_runs.to_s}"
+		time_runs.to_s
 	end
 end

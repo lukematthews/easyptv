@@ -1,8 +1,12 @@
 class TimeModel
-	attr_accessor :hour, :minutes
+	attr_accessor :hour, :minutes, :run_id
 
 	def to_s
 		"#{@hour.to_s.rjust(2, '0')}:#{@minutes.to_s.rjust(2, '0')}"
+	end
+
+	def run
+		"run: #{@run_id}" 
 	end
 
 	def each
