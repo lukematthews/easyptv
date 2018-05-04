@@ -93,11 +93,18 @@ class DayModel
 	end
 
 	def runForTime(hour, minute)
-		key = "#{hour}:#{minute}"
+		# key = "#{hour}:#{minute}"
+		time = TimeModel.new
+		time.hour = hour
+		time.minutes = minute
+		key = time.to_s
+		
 		time_runs = @runs[key]
 		 # ALL RUNS FOR DAY: #{@runs} 
-p "KEY: #{key} RUNS FOR TIME: #{time_runs}"
-p "RUNS: #{time_runs.to_s}"
+		if (hour < 10)
+			p "KEY: #{key} RUNS FOR TIME: #{time_runs}"
+			p "RUNS: #{time_runs.to_s}"
+		end
 		time_runs.to_s
 	end
 end

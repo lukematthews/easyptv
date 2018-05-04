@@ -13,6 +13,9 @@
 
 			// Configure the modal to show the travel time information.
 			$('#exampleModal').on('show.bs.modal', function (event) {
+
+				$("#stopping_list").empty();
+
 				var time = $(event.relatedTarget).attr("data-time");
 				var runs = $(event.relatedTarget).attr("data-run_id");
 
@@ -54,12 +57,21 @@
 						var title = result.departure+" "+from+" to "+to;
 
 						modal.find('.modal-title').text(title);
-						modal.find('.modal-body').html(
+						// modal.find('.modal-body').html(
+						// 	"<p>"+arriving+" ("+duration+")</p>");
+						modal.find('.modal-body > .times-content').html(
 							"<p>"+arriving+" ("+duration+")</p>");
 
 						// # Departing: 3:34pm
 						// # Taking 00:15 - 00:17 minutes
 						// # Arriving between: 3:49pm - 3:51pm
+			        	$.each(result.stops, 
+							function(index, element) 
+							{
+								var stop = $("<li>", { text: element});
+								$("#stopping_list").append(stop);
+							}
+						);
 					}
 				});
 			}
@@ -124,28 +136,32 @@
 %>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel"> </h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+<!-- 				<div class="loading">
+					<i class="fa fa-spinner fa-spin" style="font-size:48px"></i>
+				</div> -->
+				<div class="times-content">
+				</div>
+				<a data-toggle="collapse" href="#stopping_at" role="button" aria-expanded="false" aria-controls="collapseExample">
+					Stopping at...
+				</a>
+				<div id="stopping_at" class="collapse">
+					<div class="card card-body">
+						<ul id="stopping_list" class="list-unstyled stopping_list">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div id="page_data" style="display:none" 

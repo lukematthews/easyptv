@@ -259,7 +259,6 @@ p "Setting route name for Bus #{@routeName}"
 					day_model.runs[time_model.to_s] = SortedSet.new
 				end
 				day_model.runs[time_model.to_s] << day_data.run_id
-p "runs: #{day_model.runs}"
 			end
 		end
 
@@ -326,14 +325,6 @@ p "runs: #{day_model.runs}"
 
 		# Runs is a comma separated id list... make it an array...
 		runs = runs.split(", ")
-p runs
-# Desired page text:
-# Departing is from the page (cell that launched the request)
-# All the rest comes from the pattern API
-
-# Departing: 3:34
-# Taking 00:15 - 00:17
-# Arriving between: 3:49 - 3:51
 
 		departure = Time.new
 		earliest_arrival = Date.new
@@ -341,12 +332,13 @@ p runs
 		min_duration = 0
 		max_duration = 0
 
+		stops = []
+
 		# times...	{ :run_id => [:start, :end, :trip_length, :arrival]
 		# 			}
 		times = Hash.new {}
 		runs.each_with_index() do |run,index|
 			run_times = processRun(route_type, startStop, endStop, run)
-
 			if index == 0
 				departure = run_times[0]
 				earliest_arrival = run_times[1]
@@ -364,11 +356,8 @@ p runs
 				run_times[2] < min_duration ? min_duration = run_times[2] : min_duration
 				run_times[2] > max_duration ? max_duration = run_times[2] : max_duration
 			end
-			p "(departure) #{departure}"
-			p "(earliest_arrival) #{earliest_arrival}"
-			p "(latest_arrival) #{latest_arrival}"
-			p "(min_duration) #{min_duration}"
-			p "(max_duration) #{max_duration}"
+
+			stops << run_times[3]
 
 			times[run] = run_times
 		end
@@ -383,8 +372,9 @@ p runs
 
 		# Departure time:
 		travel_time.departure = departure.strftime("%l:%M%P")
-		# travel_time.departure = departure.to_s 
 
+		# Stops
+		travel_time.stops = stops.flatten.uniq!
 		# Convert it to "hh hours mm minutes" or "mm minutes" if less than an hour.
 		if min_duration == max_duration
 			travel_time.duration = format_duration(min_duration)
@@ -407,16 +397,18 @@ p runs
 		seconds = 86400*duration
 		one_hour = 60*60
 		time = Time.at(seconds).utc
+		format_string = "%-H hours %-M minutes"
 		# Is the duration less than an hour?
 		if (seconds < one_hour) 
-			time.strftime("%-M minutes")		
+			format_string = "%-M minutes"		
 		elsif (seconds < one_hour + 60)
-			time.utc.strftime("%-H hour")
+			format_string = "%-H hour"
 		elsif seconds < one_hour + (60*2)
-			time.utc.strftime("%-H hour %-M minute")
+			format_string = "%-H hour %-M minute"
 		else
-			time.strftime("%-H hours %-M minutes")		
+			format_string = "%-H hours %-M minutes"		
 		end
+		time.strftime(format_string)		
 	end
 	
 	def processRun(route_type, startStop, endStop, run)
@@ -429,15 +421,22 @@ p runs
 
 		# Iterate over the departures, looking for the stops. 
 		# Capture the departures for the start and end stop.
+		stops = []
+		running = false
 		data['departures'].map { |dep|
 			time = dep['scheduled_departure_utc']
 			stop = dep['stop_id'].to_i
 			if stop == startStop.to_i
 				# Capture the start time of the pattern
 				start_time = time
+				running = true
 			elsif stop == endStop.to_i
 				# Capture the end time of the pattern
 				end_time = time
+				running = false
+			end
+			if running
+				stops << getStopName(route_type, stop)
 			end
 		}
 
@@ -449,7 +448,7 @@ p end_time
 		# end_time - start_time = number of seconds difference as a rational.
 		# eg 1/240 = 86400 * (1/240) = 362.88 = 00:06, which is the trip length.
 		trip_length = end_time - start_time # This is a rational fraction of the day. 6 min = 1/240
-		stats = [start_time, end_time, trip_length]
+		stats = [start_time, end_time, trip_length, stops]
 	end
 
 	def getDateFromLocalString(departure_date)
