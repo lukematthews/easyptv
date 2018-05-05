@@ -188,10 +188,8 @@ p "Setting route name for Bus #{@routeName}"
 		# 	Do not load the departure into the new departures array. UNLESS... The day is a Saturday or Sunday, in which case, we want the times.
 
 		@deps.departures = []
-		days_to_load = (1..7).to_a
-		days_to_load << 9
-		days_to_load << 14
-p "days to load: #{days_to_load}"
+		days_to_load = (0..7).to_a
+
 		days_to_load.each do |day|
 			dayToLoad = now+day
 			local_day = getDepartureDateLocal(dayToLoad)
