@@ -188,22 +188,26 @@ p "Setting route name for Bus #{@routeName}"
 		# 	Do not load the departure into the new departures array. UNLESS... The day is a Saturday or Sunday, in which case, we want the times.
 
 		@deps.departures = []
-		(1..7).to_a.each do |day|
+		days_to_load = (1..7).to_a
+		days_to_load << 9
+		days_to_load << 14
+p "days to load: #{days_to_load}"
+		days_to_load.each do |day|
 			dayToLoad = now+day
+			local_day = getDepartureDateLocal(dayToLoad)
 
-			localDay = getDepartureDateLocal(dayToLoad)
-
-			isPublicHoliday = @deps.is_public_holiday(localDay)
+			isPublicHoliday = @deps.is_public_holiday(local_day)
 			if isPublicHoliday
-				@public_holidays << @deps.getHoliday(localDay)
+				@public_holidays << @deps.getHoliday(local_day)
 			end
 			sat_or_sun = false
-			sat_or_sun = localDay.cwday == 6 || localDay.cwday == 7
+			sat_or_sun = local_day.cwday == 6 || local_day.cwday == 7
 
 			# If its not a public holiday, add it.
 			# Or, if it's a SAT/SUN and a public holiday, add it. 
 			if (!isPublicHoliday || (isPublicHoliday && sat_or_sun))
 				# Load the days timetable and load it into the departures array
+p "Loading day #{local_day}"
 				@deps.departures << loadDay(dayToLoad)
 			end
 		end
@@ -220,6 +224,7 @@ p "Setting route name for Bus #{@routeName}"
 				case local.cwday
 				when 6
 					day_name = "Saturday"
+p "Loading saturday. #{day_data.departureUTC}, local: #{time}"
 				when 7
 					day_name = "Sunday"
 				else
@@ -254,7 +259,9 @@ p "Setting route name for Bus #{@routeName}"
 				end
 				day_model.times = times
 				days[day_name] = day_model
-
+if day_name == "Saturday"
+	p day_model.to_s
+end
 				if (day_model.runs[time_model.to_s].nil?)
 					day_model.runs[time_model.to_s] = SortedSet.new
 				end

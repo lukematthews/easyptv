@@ -57,14 +57,9 @@
 						var title = result.departure+" "+from+" to "+to;
 
 						modal.find('.modal-title').text(title);
-						// modal.find('.modal-body').html(
-						// 	"<p>"+arriving+" ("+duration+")</p>");
 						modal.find('.modal-body > .times-content').html(
 							"<p>"+arriving+" ("+duration+")</p>");
 
-						// # Departing: 3:34pm
-						// # Taking 00:15 - 00:17 minutes
-						// # Arriving between: 3:49pm - 3:51pm
 			        	$.each(result.stops, 
 							function(index, element) 
 							{
@@ -88,7 +83,6 @@
 			style = ""
 			if(dayModel.last_hour(hour))
 				style = "border-bottom: 1px solid black;"
-				# style = "#{style} background-color:rgb(8, 199, 304);"
 			end
 %>
 			<tr>
