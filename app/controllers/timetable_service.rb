@@ -205,7 +205,6 @@ p "Setting route name for Bus #{@routeName}"
 			# Or, if it's a SAT/SUN and a public holiday, add it. 
 			if (!isPublicHoliday || (isPublicHoliday && sat_or_sun))
 				# Load the days timetable and load it into the departures array
-p "Loading day #{local_day}"
 				@deps.departures << loadDay(dayToLoad)
 			end
 		end
@@ -222,7 +221,6 @@ p "Loading day #{local_day}"
 				case local.cwday
 				when 6
 					day_name = "Saturday"
-p "Loading saturday. #{day_data.departureUTC}, local: #{time}"
 				when 7
 					day_name = "Sunday"
 				else
@@ -257,9 +255,7 @@ p "Loading saturday. #{day_data.departureUTC}, local: #{time}"
 				end
 				day_model.times = times
 				days[day_name] = day_model
-if day_name == "Saturday"
-	p day_model.to_s
-end
+
 				if (day_model.runs[time_model.to_s].nil?)
 					day_model.runs[time_model.to_s] = SortedSet.new
 				end
@@ -379,7 +375,8 @@ end
 		travel_time.departure = departure.strftime("%l:%M%P")
 
 		# Stops
-		travel_time.stops = stops.flatten.uniq!
+		travel_time.stops = stops.flatten.uniq
+
 		# Convert it to "hh hours mm minutes" or "mm minutes" if less than an hour.
 		if min_duration == max_duration
 			travel_time.duration = format_duration(min_duration)
@@ -441,13 +438,13 @@ end
 				running = false
 			end
 			if running
-				stops << getStopName(route_type, stop)
+				stopping_at = getStopName(route_type, stop)
+				stops << stopping_at
 			end
 		}
 
 		# Get the local times of both the start and the end times.
 		start_time = getDateFromLocalString(start_time)
-p end_time
 		end_time = getDateFromLocalString(end_time)
 
 		# end_time - start_time = number of seconds difference as a rational.
