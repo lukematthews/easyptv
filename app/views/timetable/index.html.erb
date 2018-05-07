@@ -7,7 +7,7 @@
 
 <% content_for :for_head do %>
 	<%= stylesheet_link_tag "timetable" %>
-	<title><%= @routeName %> - <%= @stop %> - <%= @destination%></title>
+	<title><%= generate_title() %></title>
 <% end %>
 
 <% 
@@ -66,7 +66,6 @@
 <%
 	end
 %>
-
 <table class="titleTable">
 	<tr>
 		<td colspan=2 class="<%= @stopClass %>">

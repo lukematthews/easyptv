@@ -76,8 +76,8 @@ class TimetableService
 	 		@routeName = "Route #{routeNumber}"
 	 	when 2
 	 		@routeName = "Route #{routeNumber}"
-p "Setting route name for Bus #{@routeName}"
 	 	end
+	 	@routeName
 	end
 
 	def loadDirectionDetails(route_type, route_id, direction_id)
