@@ -28,6 +28,27 @@
 	<%= stylesheet_link_tag 'application', media: 'all',
 	'data-turbolinks-track': 'reload' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<script>
+		$( document ).on('turbolinks:load', function() {
+			var recent_dropdown = $("#recent_searches");
+			recent_dropdown.empty({});
+
+			// load the recent searches from the cookie.
+			window.jQuery.ajax({
+				url: "/recent",
+				dataType: 'json',
+				success: function(result) {
+					var direction; // Do we need this? I don't think so.
+					$.each(result, function(index, element) {
+						var link = $("<a>", {text:element.title});
+						link.attr("href", element.url);
+						link.attr("class", "dropdown-item");
+						recent_dropdown.append(link);
+					});
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -48,11 +69,6 @@
 					</a>
 					<div id="recent_searches" class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<!-- Either load this via ajax or populate it using the controller -->
-<!--						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Something else here</a>
--->
 					</div>
 				</li>
 			</ul>
