@@ -2,7 +2,7 @@ class TimetableController < ApplicationController
 
 	require 'cgi'
 
-  	helper_method :generate_title
+  helper_method :generate_title
 
 	@dayViewModelMF
 	@dayViewModelSAT
@@ -32,11 +32,9 @@ class TimetableController < ApplicationController
 
 		setPageClasses()
 
-# Cookie testing... HUZZAH!
-# %7B%22stop%22%3A%221002%22%2C%22route_type%22%3A%220%22%2C%22route%22%3A%221%22%2C%22direction%22%3A%221%22%2C%22controller%22%3A%22timetable%22%2C%22action%22%3A%22index%22%7D
-saveCookie()
-p "search cookie: (should have parameters) #{cookies[:searches]}"
-		# We need a list of 5 saved 
+		# Save this as the first search and move the others down the list.
+		# If this is already in the list, remove the existing one and have this at the top.
+		saveCookie("timetable")
 
 		render 
 	end
@@ -64,84 +62,40 @@ p "search cookie: (should have parameters) #{cookies[:searches]}"
 
 	def recentSearches
 
-		# for the "search" key in the cookie, parse the json value into the array of recent searches.
-		cookie_json = cookies["search"]
-		cookie_values = JSON.parse(cookie_json)
-
-p "COOKIE CONTENTS: #{cookie_json}"
-p "PARSED CONTENTS: #{cookie_values}"
-
-		view_data = []
-		counter = 1
-		cookie_values.each { | link_value |
-			value = {}
-			value[:search_order] = "search_#{counter}"
-			value[:title] = generate_title_for_cookie(link_value) # create the search title from the cookie value
-			value[:url] = generate_url(link_value) # create the url from the cookie value 
-			view_data << value
-			counter = counter + 1
-
-			if counter > 5
-				break
-			end
-		}
-
-
 		# The value of the cookie is a json [] containing a hash of the search parameters and the search type (arrival/withDepartures) (this comes from the params object)
 		# Parse the search parameters to create a url and name of the search
+		view_data = []
 
-		# This method doesn't need the page (action) name, it's in params
+		(1..5).to_a.each {|search_number|
+			search = {}
+			if cookies["search_#{search_number}_route_type".to_sym].nil?
+				break
+			end
+			search[:search_type] = cookies["search_#{search_number}_search_type".to_sym]
+			search[:route_type] = cookies["search_#{search_number}_route_type".to_sym]
+			search[:route] = cookies["search_#{search_number}_route".to_sym]
+			search[:stop] = cookies["search_#{search_number}_stop".to_sym]
+			search[:direction] = cookies["search_#{search_number}_direction".to_sym]
+			search[:destination] = cookies["search_#{search_number}_destination".to_sym]
+			search[:title] = generate_title_for_cookie(search)
+			search[:url] = generate_url(search)
+			view_data << search
+		}
 
-		# new_links = []
-		# new_links << {:search_order => 1, :title => generate_title, :url => generate_url}
-
-		# counter = 2
-		# cookie_values.each { | link_value |
-		# 	value = {}
-		# 	value[:search_order] = "search_#{counter}"
-		# 	value[:title] = generate_title
-		# 	value[:url] = generate_url # This needs to come from 
-		# 	new_links << value
-		# 	counter = counter + 1
-
-		# 	if counter > 5
-		# 		break
-		# 	end
-		# }
-
-# p "Converting to json #{new_links}"
-		# cookies[:search] = new_links.to_json
-
-# p "COOKIE CONTENTS AFTER LOOP: #{cookies[:search]}"
-		# {links: [
-			# {
-			# 	search_order: 1
-			# 	title: "Ashburton train timetable",
-			# 	url: "/timetable?stop=1002&route_type=0&route=1&direction=1",
-			# },
-			# {
-			# 	search_order: 2
-			# 	title: "Ashburton to Camberwell arrival times",
-			# 	url: "/timetable?stop=1002&route_type=0&route=1&direction=1",
-			# },
-		# ]}
-
-
-		# render json: cookies[:search]
 		render json: view_data
 	end
 
 	def generate_title_for_cookie(cookie_values)
 
-p "cook values for title: #{cookie_values}"
-
 		# Get the route name, stop and destination name from the timetable service using the parameters stored in the cookie.
 		t = TimetableService.new
 		route_name = t.loadRouteDetails(cookie_values[:route])
 		stop_name = t.getStopName(cookie_values[:route_type], cookie_values[:stop])
-		destination = t.loadDirectionDetails(cookie_values[:route_type], cookie_values[:route], cookie_values[:direction])
-		
-		"#{@route_name} - #{@stop_name} - #{@destination}"
+		if cookie_values[:direction].nil? == false
+			direction = t.getDirectionDetails(cookie_values[:route_type], cookie_values[:route], cookie_values[:direction])
+			title = "#{route_name} - #{stop_name} - #{direction[:direction_name]}"
+		end
+		title
 	end
 
 	def generate_title
@@ -149,82 +103,47 @@ p "cook values for title: #{cookie_values}"
 	end
 
 	def generate_url(cookie_values)
-		""
+		route_type = "route_type=#{cookie_values[:route_type]}"
+		route = "route=#{cookie_values[:route]}"
+		stop = "stop=#{cookie_values[:stop]}"
+		direction = "direction=#{cookie_values[:direction]}"
+
+		search_type = cookie_values[:search_type]
+
+		"/#{search_type}?#{route_type}&#{route}&#{stop}&#{direction}"
 	end
 
-	def saveCookie()
+	def saveCookie(type)
 
-		searches = []
-		searches << params
+		number = 1
+		# Needed for building the link url.
+		cookies["search_#{number}_search_type".to_sym] = type
+		cookies["search_#{number}_route_type".to_sym] = params[:route_type]
+		cookies["search_#{number}_route".to_sym] = params[:route]
+		cookies["search_#{number}_stop".to_sym] = params[:stop]
+		cookies["search_#{number}_direction".to_sym] = params[:direction]
+		cookies["search_#{number}_destination".to_sym] = params[:destination]
 
-		cookies[:searches] = searches
-
- # So, we want to add this search as the first one.
-
-		stop = cookies[:search_1_stop]
-		route_type = cookies[:search_1_route_type]
-		route = cookies[:search_1_route]
-		direction = cookies[:search_1_direction]
-		order = cookies[:search_1_order]
-
-		cookie_params = cookies[:search_1_params]
-
-p "stop: #{stop}, route type: #{route_type}, route: #{route}, direction: #{direction}, order: #{order}, cookie_params: #{cookie_params}"
-		cookie_searches = []
-		cookie_searches << cookie_params
 
 		# from = 1
 		# to = 2
 		# move_search(from, to)
-
-		cookies[:search_1_route_type] = params[:route_type]
-		cookies[:search_1_route] = params[:route]
-		cookies[:search_1_stop] = params[:stop]
-		cookies[:search_1_direction] = params[:direction]
-		cookies[:search_1_order] = "search_#{1}"
-
-		cookies[:search_1_params] = cookie_searches
-# 		searches = cookies["search"]
-# p "Searches from cookie(1): #{searches}"
-
-# 		# searches = {[{
-# 			# search_order: 1,
-# 			# params: (json formatted parameters)
-# 		# }]}
-# 		if searches.nil?
-# 			searches = {}
-# 		else
-# 			searches = JSON.parse(searches)
-# 		end
-
-# p "Searches from cookie: #{searches}"
-# # Add the current search to the search array.
-		
-
-# 		counter = 2
-# 		searches.each { |cookie_value|
-# p "Cookie value: #{cookie_value}"
-# 			cookie_value[:search_order] = "search_#{counter}"
-
-# 			counter = counter + 1
-# 		} 
-# p "Json saving back to cookie: @#{searches.to_json}"
-# 		cookies["search"] = searches.to_json
-# p "cookie: #{cookies["search"]}"
 	end
 
 	def move_search(from, to)
-		stop = cookies["search_#{from}_stop".intern]
-		route_type = cookies["search_#{from}_route_type".intern]
-		route = cookies["search_#{from}_route".intern]
-		direction = cookies["search_#{from}_direction".intern]
-		order = cookies["search_#{from}_order".intern]
+		searches = cookies[:searches]
 
-		cookies["search_#{to}_stop".intern] = stop
-		cookies["search_#{to}_route_type".intern] = route_type
-		cookies["search_#{to}_route".intern] = route
-		cookies["search_#{to}_direction".intern] = direction
-		cookies["search_#{to}_order".intern] = order
+		# stop = cookies["search_#{from}_stop".intern]
+		# route_type = cookies["search_#{from}_route_type".intern]
+		# route = cookies["search_#{from}_route".intern]
+		# direction = cookies["search_#{from}_direction".intern]
+		# order = cookies["search_#{from}_order".intern]
+
+		# cookies["search_#{to}_stop".intern] = stop
+		# cookies["search_#{to}_route_type".intern] = route_type
+		# cookies["search_#{to}_route".intern] = route
+		# cookies["search_#{to}_direction".intern] = direction
+		# cookies["search_#{to}_order".intern] = order
 	end
 
 	def loadTimes

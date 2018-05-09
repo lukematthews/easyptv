@@ -8,6 +8,27 @@
 <% content_for :for_head do %>
 	<%= stylesheet_link_tag "timetable" %>
 	<title><%= generate_title() %></title>
+	<script>
+		$( document ).on('turbolinks:load', function() {
+			var recent_dropdown = $("#recent_searches");
+			recent_dropdown.empty({});
+
+			// load the recent searches from the cookie.
+			window.jQuery.ajax({
+				url: "/recent",
+				dataType: 'json',
+				success: function(result) {
+					var direction; // Do we need this? I don't think so.
+					$.each(result, function(index, element) {
+						var link = $("<a>", {text:element.title});
+						link.attr("href", element.url);
+						link.attr("class", "dropdown-item");
+						recent_dropdown.append(link);
+					});
+				}
+			});
+		});
+	</script>
 <% end %>
 
 <% 

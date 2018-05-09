@@ -81,16 +81,24 @@ class TimetableService
 	end
 
 	def loadDirectionDetails(route_type, route_id, direction_id)
+		direction = getDirectionDetails(route_type, route_id, direction_id)
+		@route_id = direction[:route]
+		@destination = direction[:direction_name]
+	end
+
+	def getDirectionDetails(route_type, route_id, direction_id)
+		direction = {}
 		data = run("/v3/directions/#{direction_id}?")
 		directions = data["directions"]
 		directions.each do |d|
 			r = d["route_id"]
 			rt = d["route_type"]
 			if (r.to_s == route_id.to_s && rt.to_s == route_type.to_s)
-				@route_id = r
-				@destination = d["direction_name"]
+				direction[:route] = r
+				direction[:direction_name] = d["direction_name"]
 			end
 		end
+		direction
 	end
 
 	def getStopName(route_type, stop)
@@ -117,42 +125,8 @@ class TimetableService
 		# what time the run gets to the end_stop. To make sure we don't load too many patterns,
 		# store the run_id's into a set and only load the distinct runs/patterns
 
-		days = loadAll(route_type, route_id, stop, direction_id, end_stop, true)
-		# @deps.departures.each do | dep |
-		# 	# day has an array of departures...
-		# 	dep.each do | departure |
-		# 		loadTimesForRun(departure, end_stop)
-		# 	end
-		# end
-		days
+		loadAll(route_type, route_id, stop, direction_id, end_stop, true)
 	end
-
-	def loadTimesForRun(departure, destination)
-		# For each departure, get the run_id, add it to a set.
-		# CRAP. It looks like each departure has its own run. grr. 
-		# (This has the logic of accurate departure times though)
-
-		# GET /v3/pattern/run/{run_id}/route_type/{route_type}
-
-		# route_type_pattern = "route_type/#{@route_type}"
-		# run_pattern = "run/#{departure.run_id}"
-
-		# uri = "/v3/pattern/#{run_pattern}/#{route_type_pattern}?"
-		# data = run(uri)
-		# # This set of departures is for the pattern.
-		# data['departures'].map { |dep|
-		# 	if dep['stop_id'] == destination
-		# 		# Load the time into the time model
-		# 		arrival = dep['scheduled_departure_utc']
-				
-		# 		# We have the departure. That is where we got the run_id from :)
-		# 		# Calculate the difference in time.
-
-		# 		# And store it back into the day model.
-		# 	end
-		# }
-	end
-
 
 	#"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
 	def loadDepartures(route_type, route_id, stop, direction_id)
@@ -214,7 +188,7 @@ class TimetableService
 		# iterate through all the departures...
 		@deps.departures.each do |day|
 			day.each do |day_data|
-				local = getDepartureDateLocal(day_data.departureUTC)
+				local = getDateFromLocalString(day_data.scheduled_departure_utc)
 
 				time = local.to_time
 				# get the DayModel for the day.
