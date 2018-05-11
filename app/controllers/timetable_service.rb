@@ -138,18 +138,18 @@ class TimetableService
 		@stop = stop
 		@direction_id = direction_id
 
-# Three calls here to get more information about the timetable.
-#  * Which route is it? (Name and Number)
-#  * What direction is it going? (Name)
-#  * What stop is it? (Name)
+		# Three calls here to get more information about the timetable.
+		#  * Which route is it? (Name and Number)
+		#  * What direction is it going? (Name)
+		#  * What stop is it? (Name)
 
-# Get the route name for the route id.
+		# Get the route name for the route id.
 		loadRouteDetails(route_id)
 
-# Get direction name for the direction id
+		# Get direction name for the direction id
 		loadDirectionDetails(route_type, route_id, direction_id)
 		
-# Get the stop name for the stop id.
+		# Get the stop name for the stop id.
 		stop = getStopName(route_type, stop)
 		@stopName = stop
 

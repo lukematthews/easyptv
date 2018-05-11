@@ -140,7 +140,7 @@
 			var stop_select = $("#stop_select");
 			stop_select.empty({});
 
-			var destination_select = $("#destination_stop");
+			var destination_select = $("#destination");
 			destination_select.empty({});
 
 			$.ajax({
@@ -208,35 +208,27 @@
 			button.removeAttr("disabled")
 		}
 
-		function viewTimetable() {
-			mode = $("#mode_select").val();
-			route = $("#route_select").val();
-			stop = $("#stop_select").val();
-			direction = $('#direction_select option:selected').val();
-
-			window.location.replace("/timetable?stop="+stop+"&route_type="+mode+"&route="+route+"&direction="+direction);
-		}
-
 		function viewTimetableForDestination() {
 			mode = $("#mode_select").val();
 			route = $("#route_select").val();
 			stop = $("#stop_select").val();
 			direction = $('#direction_select option:selected').val();
-			destination = $('#destination_stop option:selected').val();
+			destination = $('#destination option:selected').val();
 
 			window.location.replace("/arrivals?stop="+stop+"&route_type="+mode+"&route="+route+"&direction="+direction+"&destination="+destination);
 		}
 
 
-		$( document ).on('turbolinks:load', function() {
+		$(function() {
 
-			// Disable the destination form for the moment.
-			// $("#destination_stop").attr("disabled", true);
-			// $("#destination_button").attr("disabled", true);
+			$("#destination_button").click(function() {
+				$("#search_form").attr("action", "arrivals");
+			});
 
 			$("#mode_select").change(function() {
 				// the mode select combo has changed, call the changeMode method to load the new set of routes. true makes it an async ajax call.
-				changeMode($(this).val(), true);				
+				changeMode($(this).val(), true);
+				$("#mode").val($(this).val());
 			});
 
 			$( "#route_select" ).change(function() {
@@ -247,6 +239,7 @@
 				mode = $("#mode_select").val();
 				route = $(this).val();
 				changeRoute(mode, route, true);
+				$("#route").val($(this).val());
 			});
 
 			$( "#stop_select" ).change(function() {
@@ -259,6 +252,7 @@
 				var selected_stop = stop.val();
 				// mode, route, stop
 				changeStop(selected_mode, selected_route, selected_stop);
+				$("#stop").val($(this).val());
 			});
 			$( "#direction_select" ).change(function() {
 				changeDirection();
@@ -280,68 +274,56 @@
 <% end %>
 
 <div class="container">
-	<form class="needs-validation" action="javascript:viewTimetable();"> 
+	<form id="search_form" action="timetable" class="needs-validation"> 
 	  <fieldset>
-		<div class="form-row">
-    		<div class="col-md-4 mb-3">
-	    		<label for="mode">Select a mode</label>
-	    		<select name="mode" id="mode_select" class="custom-select" required>
-		    	<%
-		    		@modes.each do |mode|
-		    	%>
-		    		<option value="<%= mode.route_type %>"><%= mode.route_type_name %></option>
-		    	<% end %>
-			    </select>
-			</div>
+		<div class="form-group">
+			<label for="mode_select">Select a mode</label>
+			<select name="route_type" id="mode_select" class="custom-select" required>
+				<%
+				@modes.each do |mode|
+				%>
+					<option value="<%= mode.route_type %>"><%= mode.route_type_name %></option>
+				<% end %>
+			</select>
 		</div>
-
-		<div class="form-row">
-    		<div class="col-md-4 mb-3">
-			    <label for="route">Select a route</label>
-			    <select name="route" id="route_select" class="custom-select" required></select>
-			</div>
+		<div class="form-group">
+		    <label for="route_select">Select a route</label>
+		    <select name="route" id="route_select" class="custom-select" required></select>
 		</div>
 	    
-		<div class="form-row">
-    		<div class="col-md-4 mb-3">
-			    <label for="stop">Select a stop</label>
-			    <select name="stop" id="stop_select" class="custom-select" required></select>
-			</div>
+		<div class="form-group">
+		    <label for="stop_select">Select a stop</label>
+		    <select name="stop" id="stop_select" class="custom-select" required></select>
 		</div>
 	    
-		<div class="form-row">
-    		<div class="col-md-4 mb-3">
-			    <label for="direction">Select a direction</label>
-	    		<select name="direction" id="direction_select" class="custom-select" required></select>
-			</div>
+		<div class="form-group">
+		    <label for="direction_select">Select a direction</label>
+    		<select name="direction" id="direction_select" class="custom-select" required></select>
 			<div class="invalid-feedback">
 				Which way do you want to go? Please select a direction
 			</div>
 		</div>
-	    <div class="form-row">
-    		<div class="col-md-4 mb-3">
-				<button id="timetable_button" type="submit" class="btn btn-primary">View Timetable</button>
-			</div>
+	    <div class="form-group">
+		    <label for="timetable_button"></label>
+			<button id="timetable_button" type="submit" class="btn btn-primary">View Timetable</button>
 		</div>
-	   </fieldset>
-	</form>
-
-	<form id="destination_form" class="needs-validation" action="javascript:viewTimetableForDestination();"> 
+	</fieldset>
 		<div class="form-row">
     		<div class="col-md-4 mb-3">
-			    <label for="destination_stop">So you know which way you're going. Where do you want to get off? (This will give you the travel times on the timetable - and help you pick which is the best one to catch!)</label>
-	    		<select name="destination_stop" id="destination_stop" class="custom-select" required></select>
+			    <label for="destination">So you know which way you're going. Where do you want to get off? (This will give you the travel times on the timetable - and help you pick which is the best one to catch!)</label>
+	    		<select name="destination" id="destination" class="custom-select" required></select>
 			</div>
 			<div class="invalid-feedback">
 				Where do you want to get off?
 			</div>
 		</div>
-	    <div class="form-row">
-    		<div class="col-md-4 mb-3">
-				<button id="destination_button" type="submit" class="btn btn-primary">View Travel Time - Timetable</button>
-			</div>
+	    <div class="form-row col-md-4 mb-3">
+<!--    		<div class="col-md-4 mb-3">-->
+				<button id="destination_button" type="submit" class="btn btn-primary">
+					View Travel Time - Timetable
+				</button>
+<!--			</div>-->
 		</div>
-
 	</form>
 
 

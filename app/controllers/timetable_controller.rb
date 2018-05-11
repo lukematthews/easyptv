@@ -61,27 +61,7 @@ class TimetableController < ApplicationController
 	end
 
 	def recentSearches
-
-		# The value of the cookie is a json [] containing a hash of the search parameters and the search type (arrival/withDepartures) (this comes from the params object)
-		# Parse the search parameters to create a url and name of the search
-		view_data = []
-
-		(1..5).to_a.each {|search_number|
-			search = {}
-			if cookies["search_#{search_number}_route_type".to_sym].nil?
-				break
-			end
-			search[:search_type] = cookies["search_#{search_number}_search_type".to_sym]
-			search[:route_type] = cookies["search_#{search_number}_route_type".to_sym]
-			search[:route] = cookies["search_#{search_number}_route".to_sym]
-			search[:stop] = cookies["search_#{search_number}_stop".to_sym]
-			search[:direction] = cookies["search_#{search_number}_direction".to_sym]
-			search[:destination] = cookies["search_#{search_number}_destination".to_sym]
-			search[:title] = generate_title_for_cookie(search)
-			search[:url] = generate_url(search)
-			view_data << search
-		}
-
+		view_data = read_all_cookies()
 		render json: view_data
 	end
 
@@ -113,10 +93,112 @@ class TimetableController < ApplicationController
 		"/#{search_type}?#{route_type}&#{route}&#{stop}&#{direction}"
 	end
 
+	def read_all_cookies()
+		# The value of the cookie is a json [] containing a hash of the search parameters and the search type (arrival/withDepartures) (this comes from the params object)
+		# Parse the search parameters to create a url and name of the search
+		view_data = []
+
+		(1..5).to_a.each {|search_number|
+			search = {}
+			if cookies["search_#{search_number}_route_type".to_sym].nil?
+				break
+			end
+			search[:search_type] = cookies["search_#{search_number}_search_type".to_sym]
+			search[:route_type] = cookies["search_#{search_number}_route_type".to_sym]
+			search[:route] = cookies["search_#{search_number}_route".to_sym]
+			search[:stop] = cookies["search_#{search_number}_stop".to_sym]
+			search[:direction] = cookies["search_#{search_number}_direction".to_sym]
+			search[:destination] = cookies["search_#{search_number}_destination".to_sym]
+			search[:title] = generate_title_for_cookie(search)
+			search[:url] = generate_url(search)
+			view_data << search
+		}
+
+		view_data
+	end
+
+	def cookies_contain(search_data)
+		search_string = cookie_as_string(search_data)
+
+		search_index = -1
+		cookie_data = read_all_cookies
+		cookie_data.each_with_index { |data, index|
+			# each cookie data object contains a hash of information.
+			# Turn the hash into a string for comparison.
+			cookie_string = cookie_as_string(data)
+			if cookie_string.eql?(search_string)
+				search_index = index
+				break
+			end
+		}
+		# If the return value = -1, the cookies do not contain search data.
+		search_index
+	end
+
+	def cookie_as_string(data)
+		search_type = "search_type=#{data[:search_type]}"
+		route_type = "route_type=#{data[:route_type]}"
+		route = "route=#{data[:route]}"
+		stop = "stop=#{data[:stop]}"
+		direction = "direction=#{data[:direction]}"
+		destination = "destination=#{data[:destination]}"
+		"#{search_type},#{route_type},#{route},#{stop},#{direction},#{destination}"
+	end
+
 	def saveCookie(type)
 
+		cookie_data = read_all_cookies()
+
+		search_data = {}
+		search_data[:search_type] = type
+		search_data[:route_type] = params[:route_type]
+		search_data[:route] = params[:route]
+		search_data[:stop] = params[:stop]
+		search_data[:direction] = params[:direction]
+		search_data[:destination] = params[:destination]
+		
+p cookies_contain(search_data)
+
+		# Logic...
+		# cookie to be saved goes in at number 1.
+		# for the cookies that are there,
+		# 	-> move 4 to 5
+		# 	-> move 3 to 4
+		# 	-> move 2 to 3
+		# 	-> move 1 to 2
+
+		# If the current search exists, remove it from its current location. The default logic will put it in 1.
+		# in order to remove the existing search, I guess
+
+		from = 4
+		to = 5
+		while from > 1 
+			#  If there is nothing in from, move to the next one.
+			if cookies["search_#{from}_route_type".to_sym].nil?
+p "no cookie for search_#{from} iterating down and skipping to the next one."
+				# iterate down...
+				from -= 1
+				to -= 1
+				next
+			end
+
+p "moving cookie_#{from} to cookie_#{to}"
+
+			# Take the cookie value from the "from" and move it into the "to"
+			cookies["search_#{to}_search_type".to_sym] = cookies["search_#{from}_search_type".to_sym]
+			cookies["search_#{to}_route_type".to_sym] = cookies["search_#{from}_route_type".to_sym]
+			cookies["search_#{to}_route".to_sym] = cookies["search_#{from}_route".to_sym]
+			cookies["search_#{to}_stop".to_sym] = cookies["search_#{from}_stop".to_sym]
+			cookies["search_#{to}_direction".to_sym] = cookies["search_#{from}_direction".to_sym]
+			cookies["search_#{to}_destination".to_sym] = cookies["search_#{from}_destination".to_sym]
+
+			# iterate down...
+			from -= 1
+			to -= 1
+		end
+
+		# Put the current search as the first search in the recent search list. 
 		number = 1
-		# Needed for building the link url.
 		cookies["search_#{number}_search_type".to_sym] = type
 		cookies["search_#{number}_route_type".to_sym] = params[:route_type]
 		cookies["search_#{number}_route".to_sym] = params[:route]
@@ -124,10 +206,6 @@ class TimetableController < ApplicationController
 		cookies["search_#{number}_direction".to_sym] = params[:direction]
 		cookies["search_#{number}_destination".to_sym] = params[:destination]
 
-
-		# from = 1
-		# to = 2
-		# move_search(from, to)
 	end
 
 	def move_search(from, to)

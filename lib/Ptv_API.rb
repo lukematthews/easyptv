@@ -34,6 +34,8 @@ module PtvAPI
 		apiBase = "http://timetableapi.ptv.vic.gov.au";
 		url = "#{apiBase}#{uri}devid=#{@devid}&signature=#{signature}"
 
+p url
+
 # URI needs the & or ? added to the end if there are no other query parameters
 		response = Net::HTTP.get(URI(url))
 

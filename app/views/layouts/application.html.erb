@@ -25,11 +25,10 @@
 	<% end %>
 	
 	<%= csrf_meta_tags %>
-	<%= stylesheet_link_tag 'application', media: 'all',
-	'data-turbolinks-track': 'reload' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag 'application', media: 'all' %>
+	<%= javascript_include_tag 'application' %>
 	<script>
-		$( document ).on('turbolinks:load', function() {
+		$(function() {
 			var recent_dropdown = $("#recent_searches");
 			recent_dropdown.empty({});
 
@@ -64,7 +63,7 @@
 					<a class="nav-link" href="/">Search</a>
 				</li>
 				<li class="nav-item dropdown bg-secondary">
-					<a class="nav-link dropdown-toggle" 
+					<a class="nav-link dropdown-toggle bg-secondary" 
 						href="#" id="navbarDropdown" role="button" 
 						data-toggle="dropdown" aria-haspopup="true" 
 						aria-expanded="false">
