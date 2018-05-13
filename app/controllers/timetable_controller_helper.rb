@@ -40,6 +40,10 @@ cookies["search_url_#{search_number}".to_sym] = search[:url]
 		title
 	end
 
+	def generate_title(stop, destination, route_name)
+		"#{stop} to #{destination} (#{route_name})"
+	end
+	
 	def generate_url(cookie_values)
 		route_type = "route_type=#{cookie_values[:route_type]}"
 		route = "route=#{cookie_values[:route]}"

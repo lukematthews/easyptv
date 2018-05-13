@@ -119,9 +119,4 @@ class TimetableController < ApplicationController
 	 	@stopClass = "stop_#{mode}"
 	 	@hourClass = "hour_#{mode}"
 	end
-
-	# delegate methods for controller
-	def generate_title()
-		generateTitle
-	end
 end
