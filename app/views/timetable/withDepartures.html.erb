@@ -91,7 +91,12 @@
 <% 
 	def print_times(amPm, hours, dayModel)
 %>
-		<tr><td class="<%= @hourClass %> amPm"><%= amPm %></td><td class="minutes"/></tr>
+		<tr><td class="<%= @hourClass %> amPm">
+			<%= amPm %>
+				
+			</td>
+			<td class="minutes"/>
+		</tr>
 <%
 		hours.each do |hour|
 			style = ""
@@ -106,7 +111,12 @@
 					minutes = dayModel.minutes_for_hour(hour)
 					minutes.each do |minute|
 %>
-						<span class="minutes_span" data-toggle="modal" data-target="#exampleModal" class="modal_link" data-time="<%= dayModel.display_hour(hour)%>:<%= minute %><%= amPm %>" data-run_id="<%= dayModel.runForTime(hour, minute) %>"><%= minute %></span>
+						<span class="minutes_span" 
+								data-toggle="modal" 
+								data-target="#exampleModal" 
+								class="modal_link" 
+								data-time="<%= dayModel.display_hour(hour)%>:<%= minute %><%= amPm %>" 
+								data-run_id="<%= dayModel.runForTime(hour, minute) %>"><%= minute %></span>
 <%				
 					end
 %>
@@ -143,29 +153,43 @@
 	end
 %>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" 
+		id="exampleModal" 
+		tabindex="-1" 
+		role="dialog" 
+		aria-labelledby="exampleModalLabel" 
+		aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel"> </h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" 
+						class="close" 
+						data-dismiss="modal" 
+						aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
 				<div id="spinner" class="loading text-center">
-					<i class="fa fa-spinner fa-spin" style="font-size:48px"></i>
+					<i class="fa fa-spinner fa-spin" style="font-size:48px">
+					</i>
 				</div>
 				<div class="times-content">
 				</div>
 				<div>
 					<div id="stopping_link">
-						<a id="stopping-link-a" data-toggle="collapse" href="#stopping_at" role="button" aria-expanded="false" aria-controls="collapseExample">
+						<a id="stopping-link-a" data-toggle="collapse" 
+							href="#stopping_at" role="button" 
+							aria-expanded="false" 
+							aria-controls="collapseExample">
 								Stopping at... (x stops)
 							</a>
 					</div>
 					<div id="stopping_at" class="collapse"">
-						<div  id="stopping-content" class="card card-body pre-scrollable" style="height:150px; overflow:auto;">
+						<div  id="stopping-content" 
+								class="card card-body pre-scrollable" 
+								style="height:150px; overflow:auto; padding: 5px;">
 							<ul id="stopping_list" class="list-unstyled stopping_list">
 							</ul>
 						</div>
