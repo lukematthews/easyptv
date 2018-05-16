@@ -63,7 +63,7 @@ class TimetableController < ApplicationController
 	end
 
 	def recentSearches
-		view_data = read_all_cookies()
+		view_data = read_all_cookies(false)
 		render json: view_data
 	end
 
