@@ -2,19 +2,6 @@ module TimetableControllerHelper
 
 	require 'cgi'
 
-# save_cookie(type)... when a search for either timetable or arrival times 
-	# is requested, read all the cookies. If the cookies contain the search,
-	# The search will need to be turned into a string that will be 
-	# saved in the cookie.
-	# remove the existing search and put the new one at the top of the list 
-
-# New/rewrite methods required:
-# 	parse_cookie(number) for the given number, read the search string from
-# 		that cookie and return a hash representing that search string.
-# 	search_hash_to_string(search_hash) given a hash, format it as a comma
-# 		seperated string. This string can then be saved back to the cookie.
-
-
 	def read_all_cookies(as_string)
 		view_data = []
 		(1..5).to_a.each { |search_number|
