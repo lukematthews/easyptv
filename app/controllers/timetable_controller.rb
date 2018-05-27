@@ -17,7 +17,14 @@ class TimetableController < ApplicationController
 	@stopId
 	@directionId
 
-	@hello
+	@route_maps
+	@map_src
+
+	def initialize
+		super
+		file = File.read("app/assets/reference/map_urls-2.json")
+		@route_maps = JSON.parse(file)
+	end
 
 	def index
 		# This should really be using ids instead of names.
@@ -37,6 +44,11 @@ class TimetableController < ApplicationController
 		# Save this as the first search and move the others down the list.
 		# If this is already in the list, remove the existing one and have this at the top.
 		saveCookie("timetable")
+
+		# Get the map image url.
+		@map_src = @route_maps[@routeId]["map_url"]
+p @route_maps[@routeId]
+p @map_src
 
 		render 
 	end
@@ -59,6 +71,28 @@ class TimetableController < ApplicationController
 
 		setPageClasses()
 
+		render
+	end
+
+	def bootstrap
+		# This should really be using ids instead of names.
+		# using ids means we can get the names from the api (similar to the setup page)
+		@routeTypeId = params[:route_type]
+		@routeId = params[:route]
+		@stopId = params[:stop]
+		@directionId = params[:direction]
+
+		t = TimetableService.new
+		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
+
+		setTimes(t, days)
+
+		setPageClasses()
+
+		# Save this as the first search and move the others down the list.
+		# If this is already in the list, remove the existing one and have this at the top.
+		saveCookie("timetable")
+		
 		render
 	end
 
