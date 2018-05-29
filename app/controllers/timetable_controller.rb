@@ -20,6 +20,8 @@ class TimetableController < ApplicationController
 	@route_maps
 	@map_src
 
+	@with_departures
+
 	def initialize
 		super
 		file = File.read("app/assets/reference/map_urls-2.json")
@@ -47,8 +49,8 @@ class TimetableController < ApplicationController
 
 		# Get the map image url.
 		@map_src = @route_maps[@routeId]["map_url"]
-p @route_maps[@routeId]
-p @map_src
+
+		@with_departures = false
 
 		render 
 	end
@@ -71,7 +73,12 @@ p @map_src
 
 		setPageClasses()
 
-		render
+		# Get the map image url.
+		@map_src = @route_maps[@routeId]["map_url"]
+
+		@with_departures = true
+
+		render :index
 	end
 
 	def bootstrap
@@ -141,6 +148,7 @@ p @map_src
 	 		mode = "tram"
 	 		@iconImage = "yarra-trams-logo-white.gif"
 	 	when "2"
+	 		# This needs to change to "operator_icon_for_route()"
 	 		@iconImage = "ventura white icon.png"
 	 	when "3"
 	 		mode = "vline"
