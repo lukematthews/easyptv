@@ -95,25 +95,6 @@
 
 <% end %>
 
-<% def timetable_minutes(minutes)
-	p "minute: #{minute}"
-%>
-	<span style="margin-left:10px;"><%= minute %></span>
-
-<% end %>
-
-
-<% def arrival_span(dayModel, hour, minute) %>
-	<span class="minutes_span"
-			data-toggle="modal"
-			data-target="#exampleModal"
-			class="modal_link"
-			data-time="<%= dayModel.display_hour(hour)%>:<%= minute %><%= amPm %>"
-			data-run_id="<%= dayModel.runForTime(hour, minute) %>">
-		<%= minute %>
-	</span>
-<% end %>
-
 <% 
 	def print_times(amPm, hours, dayModel)
 %>
@@ -187,6 +168,26 @@
 			</div>
 		<% } %>
 	</div>
+<%
+	end
+%>
+
+<%
+	def print_no_times(day, style)
+%>
+	<table class="times" style="<%= style %>">
+		<tr class="day"><td colspan=2 style="padding: 2px;">
+			<%= day %></td>
+		</tr>
+		<tr>
+			<td colspan=2>
+				There are no times for <%= @stop %> 
+				going to <%= @destination %>. You may have chosen a stop
+				at the end of the line.
+			</td>
+		</tr>
+	</table>
+
 <%
 	end
 %>
@@ -292,35 +293,65 @@
 	table_width = ""
 	if @map_src.nil? == false 
 %>
-		<img class="rounded mx-auto d-block" style="float:right; width: 25%" src="<%= @map_src %>">
-		<% table_width = "width: 75%" %>
+		<img class="rounded mx-auto d-block" 
+			style="float:right; width: 25%" 
+			src="<%= @map_src %>">
 <%
+		table_width = "width: 75%;"
 	end 
 %>
-
-<% style= table_width %>
+	
+<%
+	if @dayViewModelMF.nil? 
+		# No services for day, print a nice message.
+		style = table_width
+		print_no_times("Monday to Friday", style)
+	else
+		style = table_width
+%>
 		<table class="times" style="<%= style %>">
 			<tr class="day"><td colspan=2 style="padding: 2px;">
 				<%= @dayViewModelMF.name %></td></tr>
 			<% print_times(am, amHours, @dayViewModelMF ) %>
 			<% print_times(pm, pmHours, @dayViewModelMF ) %>
 		</table>
+<%
+	end
+%>
+
+
 	</div>
 
 <!-- Saturday -->
 	<div class="saturday,day,weekend">
+<% 
+	if @dayViewModelSAT.nil?
+		# No services for day, print a nice message.
+		print_no_times("Saturday", "")
+	else
+%>
 		<table class="times">
-			<tr class="day"><td colspan=2 style="padding: 2px;">
-				<%= @dayViewModelSAT.name %></td></tr>
-			<% 
-				print_times(am, amHours, @dayViewModelSAT)
-				print_times(pm, pmHours, @dayViewModelSAT)
-			%>
+			<tr class="day">
+				<td colspan=2 style="padding: 2px;">
+					<%= @dayViewModelSAT.name %>
+				</td></tr>
+<% 
+		print_times(am, amHours, @dayViewModelSAT)
+		print_times(pm, pmHours, @dayViewModelSAT)
+%>
 		</table>
+<%
+	end
+%>
 	</div>
 
 <!-- Sunday -->
 	<div class="sunday,day,weekend">
+<%
+	if @dayViewModelSUN.nil?
+		print_no_times("Sunday", "")
+	else
+%>
 		<table class="times">
 			<tr class="day"><td colspan=2 style="padding: 2px;">
 				<%= @dayViewModelSUN.name %></td></tr>
@@ -329,6 +360,9 @@
 				print_times(pm, pmHours, @dayViewModelSUN)
 			%>
 		</table>
+<%
+	end
+%>
 	</div>
 <!-- Service Information -->
 	<div class="serviceInformation">
