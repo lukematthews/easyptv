@@ -18,6 +18,7 @@ class TimetableController < ApplicationController
 	@directionId
 
 	@route_maps
+	@bus_icons
 	@map_src
 
 	@with_departures
@@ -26,6 +27,8 @@ class TimetableController < ApplicationController
 		super
 		file = File.read("app/assets/reference/map_urls-2.json")
 		@route_maps = JSON.parse(file)
+		file = File.read("app/assets/reference/bus_icons.json")
+		@bus_icons = JSON.parse(file)
 	end
 
 	def index
@@ -149,7 +152,7 @@ class TimetableController < ApplicationController
 	 		@iconImage = "yarra-trams-logo-white.gif"
 	 	when "2"
 	 		# This needs to change to "operator_icon_for_route()"
-	 		@iconImage = "ventura white icon.png"
+			@iconImage = operator_icon_for_route(@routeId)
 	 	when "3"
 	 		mode = "vline"
 	 		@iconImage = "vline-logo-white-180x89.png"
@@ -160,5 +163,9 @@ class TimetableController < ApplicationController
 
 	 	@stopClass = "stop_#{mode}"
 	 	@hourClass = "hour_#{mode}"
+	end
+
+	def operator_icon_for_route(bus_route_id)
+		@bus_icons[bus_route_id.to_s]["icon"]
 	end
 end

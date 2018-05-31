@@ -1,0 +1,2778 @@
+{
+  "785": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "786": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "789": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "821": {
+    "operator": "Ryan Brothers Bus Service",
+    "icon": "bus_logos/ryan-brothers-bus-service.png"
+  },
+  "822": {
+    "operator": "Ryan Brothers Bus Service",
+    "icon": "bus_logos/ryan-brothers-bus-service.png"
+  },
+  "823": {
+    "operator": "Ryan Brothers Bus Service",
+    "icon": "bus_logos/ryan-brothers-bus-service.png"
+  },
+  "825": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "827": {
+    "operator": "Kastoria Bus Lines",
+    "icon": "bus_logos/kastoria-buslines.png"
+  },
+  "834": {
+    "operator": "Sunbury Bus Service",
+    "icon": "bus_logos/sunbury-bus-service.gif"
+  },
+  "841": {
+    "operator": "Kastoria Bus Lines",
+    "icon": "bus_logos/kastoria-buslines.png"
+  },
+  "844": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "845": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "847": {
+    "operator": "Moreland Buslines",
+    "icon": "bus_logos/moreland_bus_group.png"
+  },
+  "848": {
+    "operator": "Moreland Buslines",
+    "icon": "bus_logos/moreland_bus_group.png"
+  },
+  "850": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "851": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "854": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "855": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "857": {
+    "operator": "Broadmeadows Bus Service",
+    "icon": "bus_logos/broadmeadows-bus-service.png"
+  },
+  "860": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "861": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "862": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "867": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "869": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "870": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "884": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "908": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "919": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "923": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "924": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "925": {
+    "operator": "Martyrs Bus Service",
+    "icon": "bus_logos/martyrs bus service.jpg"
+  },
+  "927": {
+    "operator": "McKenzie's Tourist Services",
+    "icon": "bus_logos/McKenzie's Tourist Services Pty Ltd.png"
+  },
+  "928": {
+    "operator": "McKenzie's Tourist Services",
+    "icon": "bus_logos/McKenzie's Tourist Services Pty Ltd.png"
+  },
+  "929": {
+    "operator": "McKenzie's Tourist Services",
+    "icon": "bus_logos/McKenzie's Tourist Services Pty Ltd.png"
+  },
+  "931": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "932": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "935": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "937": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "939": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "943": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "945": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "946": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "948": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "949": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "950": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "952": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "953": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "954": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "955": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "957": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "959": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "960": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "961": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "962": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "963": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "964": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "965": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "970": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "971": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "972": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "973": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "974": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "975": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "977": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "979": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "980": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "982": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "999": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1000": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1001": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1003": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1006": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1007": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1013": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1015": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1019": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1023": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1026": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1030": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1123": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1137": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1138": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1143": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1150": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1173": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1174": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1175": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1176": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1182": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1183": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1184": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1185": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1186": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1187": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1188": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1294": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1295": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1296": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1297": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1300": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1301": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1302": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1303": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1304": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1305": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1306": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1307": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1308": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1309": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1310": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1311": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1312": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1314": {
+    "operator": "Tullamarine Bus Lines",
+    "icon": "bus_logos/Tullamarine_Logo_Banner3.png"
+  },
+  "1318": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1319": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1320": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1322": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1341": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1342": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1344": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1345": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1346": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1350": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1355": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1357": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1365": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1373": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1374": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1375": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1379": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1396": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1399": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1400": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1439": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1440": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1441": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1443": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1444": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1446": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1447": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1448": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1449": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1450": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1452": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1461": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1464": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1469": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1470": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1474": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1475": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1493": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1494": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1495": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1506": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1507": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1510": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1511": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1515": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1524": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1532": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1533": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1538": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1539": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1545": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1551": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1571": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1574": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1575": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1577": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1579": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1586": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1587": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1595": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1596": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1608": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1609": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1610": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1611": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1624": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1632": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "1658": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1659": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1660": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1664": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "1665": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "1666": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "1667": {
+    "operator": "Tullamarine Bus Lines",
+    "icon": "bus_logos/Tullamarine_Logo_Banner3.png"
+  },
+  "1671": {
+    "operator": "Broadmeadows Bus Service",
+    "icon": "bus_logos/broadmeadows-bus-service.png"
+  },
+  "1673": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "1878": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1879": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1909": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1910": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1916": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1917": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1918": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1921": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1925": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1935": {
+    "operator": "McKenzie's Tourist Services",
+    "icon": "bus_logos/McKenzie's Tourist Services Pty Ltd.png"
+  },
+  "1947": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1991": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "1995": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2055": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2079": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2089": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2126": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2285": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2293": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2294": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2295": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2339": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2342": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "2349": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2505": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "2517": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "2768": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2808": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "2813": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "2895": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2896": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2897": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2913": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2916": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2919": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2922": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2925": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2928": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2931": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2934": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2937": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2943": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2945": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "2982": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3287": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3321": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3322": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3324": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3346": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3354": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3365": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "3374": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "3377": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "3380": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3394": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3398": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "3401": {
+    "operator": "Kastoria Bus Lines",
+    "icon": "bus_logos/kastoria-buslines.png"
+  },
+  "3408": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "3411": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3420": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3423": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3438": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3448": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3453": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "3469": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "3483": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "4543": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "4547": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "4663": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4664": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4711": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4733": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4736": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4745": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4747": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4748": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "4752": {
+    "operator": "Broadmeadows Bus Service",
+    "icon": "bus_logos/broadmeadows-bus-service.png"
+  },
+  "4755": {
+    "operator": "Broadmeadows Bus Service",
+    "icon": "bus_logos/broadmeadows-bus-service.png"
+  },
+  "4757": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4758": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4761": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "4769": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "4780": {
+    "operator": "Sunbury Bus Service",
+    "icon": "bus_logos/sunbury-bus-service.gif"
+  },
+  "4786": {
+    "operator": "Sunbury Bus Service",
+    "icon": "bus_logos/sunbury-bus-service.gif"
+  },
+  "4789": {
+    "operator": "Sunbury Bus Service",
+    "icon": "bus_logos/sunbury-bus-service.gif"
+  },
+  "4792": {
+    "operator": "Sunbury Bus Service",
+    "icon": "bus_logos/sunbury-bus-service.gif"
+  },
+  "4795": {
+    "operator": "Sunbury Bus Service",
+    "icon": "bus_logos/sunbury-bus-service.gif"
+  },
+  "4798": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4802": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "4805": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "4849": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4855": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4861": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4864": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "4896": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5023": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5038": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5041": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5048": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5051": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5052": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5055": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5062": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5063": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5069": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5105": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5108": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5125": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5126": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5132": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5135": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5331": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5332": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5333": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5334": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5335": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5368": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5369": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5370": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "5371": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "5375": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5377": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5378": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5379": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5382": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5385": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5415": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5460": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5480": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5481": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5510": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5537": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5540": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5589": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "5607": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "5634": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5664": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "5671": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "5675": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5681": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5684": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5700": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5701": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5704": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5722": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5728": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5729": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5731": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5732": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5734": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5735": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5736": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5738": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5741": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5746": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5747": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "5748": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5767": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5768": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "5770": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "5809": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5812": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "5814": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5827": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5834": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5837": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5841": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5843": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5844": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5845": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "5846": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "6572": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "6647": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "6648": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "6649": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "6716": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7318": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7395": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7440": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7441": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7442": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7445": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7446": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7453": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7455": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7456": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7461": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7462": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7464": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7522": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7531": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7613": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7617": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7620": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7624": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7627": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7700": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7703": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7716": {
+    "operator": "Broadmeadows Bus Service",
+    "icon": "bus_logos/broadmeadows-bus-service.png"
+  },
+  "7719": {
+    "operator": "Broadmeadows Bus Service",
+    "icon": "bus_logos/broadmeadows-bus-service.png"
+  },
+  "7720": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7723": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7726": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7762": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7765": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7768": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7771": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7772": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7776": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7779": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7782": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7785": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7788": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7791": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "7797": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7852": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "7891": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "7953": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8074": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8080": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8084": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8095": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8114": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8118": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8122": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8125": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8128": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8132": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8135": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8139": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8142": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8174": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8177": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8179": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "8185": {
+    "operator": "Tullamarine Bus Lines",
+    "icon": "bus_logos/Tullamarine_Logo_Banner3.png"
+  },
+  "8224": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8229": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8232": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8233": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8243": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8246": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8250": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8263": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8272": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8275": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8302": {
+    "operator": "Tullamarine Bus Lines",
+    "icon": "bus_logos/Tullamarine_Logo_Banner3.png"
+  },
+  "8306": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8307": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8308": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "8317": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "8361": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8362": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8365": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8373": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8399": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8430": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8435": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8452": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8457": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8462": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8482": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8483": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8484": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8485": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8486": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8487": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8488": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8489": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8490": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8493": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8494": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8507": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8508": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8514": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8517": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8561": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8564": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8565": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8566": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8567": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8568": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8569": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8570": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8571": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8572": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8574": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8579": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8582": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8587": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8590": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8591": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8596": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8599": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8602": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8606": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8611": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8614": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8615": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8618": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8621": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8624": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8627": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8630": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8639": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8645": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8648": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8651": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8654": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8657": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8660": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8677": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8680": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8681": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8682": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8700": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8708": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "8710": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8714": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8765": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8871": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "8878": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "8879": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "8883": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "8887": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "8912": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "8913": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "8922": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "8923": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "8924": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "8925": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "8934": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "8983": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "8988": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10827": {
+    "operator": "Kastoria Bus Lines",
+    "icon": "bus_logos/kastoria-buslines.png"
+  },
+  "10830": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10839": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10842": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10846": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10854": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10861": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "10863": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10864": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10897": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "10900": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "10903": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "10904": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "10917": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "10920": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10923": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10924": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10927": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "10933": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "10937": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "10940": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "10952": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10955": {
+    "operator": "East West Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "10958": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10961": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10964": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "10967": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10980": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "10990": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "10994": {
+    "operator": "Reservoir Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "11003": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11096": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11099": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11102": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11109": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11112": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11115": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11118": {
+    "operator": "East West Bus Company",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "11121": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11122": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "11123": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11143": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11205": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11286": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11289": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11290": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11291": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11296": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11297": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11300": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11303": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11304": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11305": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11306": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "11307": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "11308": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11309": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11313": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11314": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11315": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11318": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11319": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11320": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11323": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11326": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "11329": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11337": {
+    "operator": "Cranbourne Transit",
+    "icon": "bus_logos/cranbourne-transit.png"
+  },
+  "11342": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11354": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11357": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11360": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11363": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11366": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11369": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11372": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11375": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11378": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11381": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11384": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11387": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11390": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11393": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11397": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11446": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11455": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11456": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11457": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11458": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11461": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11462": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11464": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11465": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11466": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11472": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11473": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11474": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11475": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11478": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11504": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11507": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11510": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11513": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11516": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11519": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11523": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11524": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11525": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11526": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11527": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11528": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11532": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11536": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11539": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11552": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11575": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11578": {
+    "operator": "Tullamarine Bus Lines",
+    "icon": "bus_logos/Tullamarine_Logo_Banner3.png"
+  },
+  "11591": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "11597": {
+    "operator": "Panorama Coaches",
+    "icon": "bus_logos/panorama-logo.png"
+  },
+  "11600": {
+    "operator": "Panorama Coaches",
+    "icon": "bus_logos/panorama-logo.png"
+  },
+  "11603": {
+    "operator": "Panorama Coaches",
+    "icon": "bus_logos/panorama-logo.png"
+  },
+  "11606": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11609": {
+    "operator": "Panorama Coaches",
+    "icon": "bus_logos/panorama-logo.png"
+  },
+  "11616": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11617": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11618": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11619": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11620": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11621": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11622": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11623": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11624": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11625": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11626": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11627": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11629": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11630": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11631": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11632": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11633": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11634": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11653": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "11664": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11694": {
+    "operator": "Transdev Melbourne",
+    "icon": "bus_logos/transdev-logo-tag.png"
+  },
+  "11697": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11698": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11699": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "11700": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "11702": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "11703": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11704": {
+    "operator": "Dyson's Bus Services",
+    "icon": "bus_logos/dyson-logo-dark_2x.png"
+  },
+  "11711": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11712": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "11713": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11714": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "11716": {
+    "operator": "Tullamarine Bus Lines",
+    "icon": "bus_logos/Tullamarine_Logo_Banner3.png"
+  },
+  "12743": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "12746": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "12749": {
+    "operator": "PTV",
+    "icon": "bus_logos/iconBus.png"
+  },
+  "12750": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "12751": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "12752": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "12753": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "12766": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "12767": {
+    "operator": "Sita Buslines",
+    "icon": "bus_logos/sita-buslines.png"
+  },
+  "12768": {
+    "operator": "Ventura Bus Lines",
+    "icon": "bus_logos/ventura white icon.png"
+  },
+  "12769": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "13024": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "13025": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "13026": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "13027": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "13028": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  },
+  "13052": {
+    "operator": "CDC Melbourne",
+    "icon": "bus_logos/cdc-melbourne.png"
+  }
+}
