@@ -64,11 +64,12 @@ module TimetableControllerHelper
 				cookie_values["route"], 
 				cookie_values["direction"])
 			direction_name = direction[:direction_name]
-			if cookie_values["search_type"].eq("timetable")
+			if cookie_values["search_type"].eql? "timetable"
 				going_to = "#{direction_name}"
 				page = "Timetable"
 			else
-				going_to = cookie_values["destination"]
+				going_to = t.getStopName(cookie_values["route_type"], 
+					cookie_values["destination"])
 				page = "Arrival Times"
 			end
 			title = "#{stop_name} to #{going_to} - (#{route_name}): #{page}"
