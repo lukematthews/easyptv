@@ -64,7 +64,14 @@ module TimetableControllerHelper
 				cookie_values["route"], 
 				cookie_values["direction"])
 			direction_name = direction[:direction_name]
-			title = "#{stop_name} to #{direction_name} - (#{route_name})"
+			if cookie_values["search_type"].eq("timetable")
+				going_to = "#{direction_name}"
+				page = "Timetable"
+			else
+				going_to = cookie_values["destination"]
+				page = "Arrival Times"
+			end
+			title = "#{stop_name} to #{going_to} - (#{route_name}): #{page}"
 		end
 		title
 	end
@@ -78,10 +85,11 @@ module TimetableControllerHelper
 		route = "route=#{cookie_values['route']}"
 		stop = "stop=#{cookie_values['stop']}"
 		direction = "direction=#{cookie_values['direction']}"
-
+# destination... for arrivals.
+		destination = "destination=#{cookie_values['destination']}"
 		search_type = cookie_values["search_type"]
 
-		CGI::unescape("/#{search_type}?#{route_type}&#{route}&#{stop}&#{direction}")
+		CGI::unescape("/#{search_type}?#{route_type}&#{route}&#{stop}&#{direction}&#{destination}")
 	end
 
 	def cookies_contain(search_data, symbols)

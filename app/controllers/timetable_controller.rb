@@ -76,6 +76,8 @@ class TimetableController < ApplicationController
 
 		setPageClasses()
 
+		saveCookie("arrivals")
+
 		# Get the map image url.
 		@map_src = @route_maps[@routeId]["map_url"]
 

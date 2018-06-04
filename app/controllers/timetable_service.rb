@@ -102,6 +102,7 @@ class TimetableService
 	end
 
 	def getStopName(route_type, stop)
+p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
 		data = run("/v3/stops/#{stop}/route_type/#{route_type}?")
 		data["stop"]["stop_name"]
 	end
