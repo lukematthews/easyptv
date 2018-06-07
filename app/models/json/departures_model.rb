@@ -13,6 +13,8 @@ class Departures
 		@public_holidays[Date.new(2018, 4, 1)] = ["Easter Sunday" , "Saturday"]
 		@public_holidays[Date.new(2018, 4, 2)] = ["Easter Monday" , "Saturday"]
 		@public_holidays[Date.new(2018, 4, 25)] = ["ANZAC Day" , "Saturday"]
+		@public_holidays[Date.new(2018, 6, 11)] = ["Queen's Birthday" , "Saturday"]
+
 		@public_holidays[Date.new(2018, 11, 6)] = ["Melbourne Cup" , "Saturday"]
 		@public_holidays[Date.new(2018, 12, 25)] = ["Christmas Day" , "Sunday"]
 		@public_holidays[Date.new(2018, 12, 26)] = ["Boxing Day" , "Saturday"]
