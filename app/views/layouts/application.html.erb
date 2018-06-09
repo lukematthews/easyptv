@@ -18,13 +18,13 @@
 	<!-- JQuery -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
 		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 	<script 
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" 
 		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" 
 		crossorigin="anonymous"></script>
+
 	<% if content_for? :for_head %>
     	<%= yield :for_head %>
 	<% end %>
@@ -63,11 +63,13 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse text-light" id="navbarNav">
-			<form action="/" style="padding-right: 5px;"><button class="btn btn-primary">Search</button></form>
-
+			<form action="/" style="padding-right: 5px;">
+				<button class="btn btn-primary">Search</button>
+			</form>
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" 
-				  	type="button" id="dropdownMenuButton" data-toggle="dropdown" 
+				  	type="button" 
+				  	id="dropdownMenuButton" data-toggle="dropdown" 
 				  	aria-haspopup="true" aria-expanded="false">
 						Recent
 				</button>
@@ -78,6 +80,22 @@
 		</div>
 		<form action="/about"><button class="btn btn-success">About</button></form>
 	</nav>
+
+	<% if cookies && cookies['cookie_eu_consented'] != 'true' %>
+	<div class="cookies-eu js-cookies-eu container card text-white bg-dark mb-3">
+    	<div class="row align-items-center">
+			<div class="col-md-11">
+				Cookies are used to remember your recent searches. 
+				By using this site, you agree to using cookies
+			</div>
+		    <div class="col-md-1">
+		    	<button class="cookies-eu-ok js-cookies-eu-ok btn btn-primary">Ok</button>
+    		</div>
+    	</div>
+	</div>
+	<% end %>
+
 	<%= yield %>
+
 </body>
 </html>
