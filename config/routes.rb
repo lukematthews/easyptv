@@ -17,5 +17,9 @@ Rails.application.routes.draw do
 	get '/directions/:id', to: 'setup#directions'
 	get '/bus_operators', to: 'setup#bus_operators'
 
+	get '/map_urls', to: 'maps#index'
+
+
 	resources :about
+
 end
