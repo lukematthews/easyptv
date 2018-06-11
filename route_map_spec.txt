@@ -1,0 +1,46 @@
+Route maps:
+
+
+Url that hosts the map page. Use this page to get the url of the image.
+For example: https://www.ptv.vic.gov.au/getting-around/maps/(metropolitan-buses)(route_type)/view/(3438)(route_id)/
+
+If we could then use jQuery on these pages (which we can't! boo! cross origin issue) the image tag is at: $("#route-map").attr("src")
+
+So... to get the image url's, we need to:
+1. Load all the routes via the PTV API.
+2. Create the url's for the map pages.
+3. For each the url's execute the http request
+4. For the html response, get the src attribute of <img id="route-map">. We now
+have the image href that we can use to create a reference json file. The json file should have: route_type, route_id, map_href
+5. When building the timetable view, the controller should inspect the generated json file and serve the map image href to the erb.
+6. BINGO BANGO.
+
+route_type_names = {
+	0 => "metropolitan-trains",
+	1 => "metropolitan-trams",
+	2 => "metropolitan-buses",
+	3 => "metropolitan-buses",
+	4 => "metropolitan-buses",
+}
+
+TEST HTML FOR MAP IMAGE SRC
+<img id="route-map" src="foo">
+
+REGEX FOR FINDING IMG ELEMENT
+<\s*img id="route-map" src="(.*?)"*>
+
+
+
+
+Extract the image url out of the "index.html" and put it in a file called map_url.out
+	sed -n 's/.*img id="route-map" src="\([^"]*\).*/\1/p' index.html > map_url.out
+OR: store the file url as a bash variable "$url"
+	url=`sed -n 's/.*img id="route-map" src="\([^"]*\).*/\1/p' index.html`
+
+Save the file to disk:
+	wget $url
+
+OR DO THE WHOLE THING IN ONE GO... woo.
+	wget `sed -n 's/.*img id="route-map" src="\([^"]*\).*/\1/p' index.html`
+
+Now... how do I parse the json and iterate over each route. Ideally, the route map should be saved to disk and then referenced in the json file. This could then be used
