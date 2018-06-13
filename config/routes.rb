@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 	get '/arrivals', to: 'timetable#withDepartures'
 	get '/times', to: 'timetable#loadTimes'
 	get '/recent', to: 'timetable#recentSearches'
+	get '/route_map', to: 'timetable#route_map'
 
 	resources :setup do
 		member do

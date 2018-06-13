@@ -58,6 +58,13 @@ class TimetableController < ApplicationController
 		render 
 	end
 
+	def route_map
+		route_id = params[:route_id]
+		# Get the map image url.
+		@map_src = @route_maps[route_id]["map_url"]
+		render json: @map_src
+	end
+
 	def withDepartures
 		@routeTypeId = params[:route_type]
 		@routeId = params[:route]
