@@ -1,8 +1,9 @@
-class StopOrder2  
+class GenerateStopOrders  
 	require_relative '../lib/Ptv_API'
 	include PtvAPI
 
-	require_relative '../lib/stop_order_3'
+	# require_relative '../lib/stop_order_3'
+	require_relative '../lib/stop_sorter'
 
 	require 'date'
 	require 'json'
@@ -15,35 +16,40 @@ class StopOrder2
 	require_relative '../app/models/json/route_model'
 
 	def create_stop_order
-		all_stops = {}
+		stops_for_routes = []
+
+		route_counter = 0
 
 		# Load all the routes
 		routes = routes()
 		routes.each do |route|
 
-# Just work on Frankston for the moment.
-# if (route.route_id != 6)
-# 	next
+			route_counter += 1
+
+# Early testing bail out. Stop at 10 routes.
+# print "\n\r#{route_counter}"
+# if route_counter == 10
+# 	break
 # end
+			so_route = SORoute.new
+			so_route.route_id = route.route_id
 			# Get the runs for the route. This allow us to get the patterns.
 			# get the directions for the route
 			directions = directions_for_route(route.route_id)
 			# stops_for_direction = []
 			directions.each do | direction |
-# City to Frankston
-# if direction.direction_id != 5
-#   next
-# end
 				# stops_for_direction << process_direction_for_route(route, direction)
 				sorted_stops = process_direction_for_route(route, direction)
 
-p "Sorted stops: #{sorted_stops}"
-				stop_key = "#{route.route_id},#{direction.direction_id}" 
-				all_stops[stop_key]= sorted_stops
-
+				so_direction = SODirection.new
+				so_direction.direction_id = direction.direction_id
+				so_direction.stops = sorted_stops
+				so_route.directions << so_direction
 			end
+			stops_for_routes << so_route
 		end
-		# p all_stops
+		p stops_for_routes
+		StopWriter.new.write_stops_to_file(stops_for_routes)
 	end
 
 	def process_direction_for_route(route, direction)
@@ -58,7 +64,7 @@ p "Sorted stops: #{sorted_stops}"
 
 		pattern_stops = Set[]
 
-	    print "Number of runs for route #{route} direction #{direction}: #{runs_for_direction.length}\n"
+	    print "\nNumber of runs for route #{route} direction #{direction}: #{runs_for_direction.length}\n"
 	    counter = 0
 		runs_for_direction.each do |run|
 
@@ -97,11 +103,8 @@ p "Sorted stops: #{sorted_stops}"
 		# (pattern_stops is an array of Set's, convert it into an array.)
 		pattern_stops = pattern_stops.to_a
 
-		# sorted_stops[0] = pattern_stops[0]
-p "Sorted set before stop sorter: #{sorted_stops}"
-		(1..pattern_stops.length-1).each do |list_index|
+		(0..pattern_stops.length-1).each do |list_index|
 			StopSorter.new.sort_list(sorted_stops, pattern_stops[list_index])
-p "Sorted set at #{list_index}: #{sorted_stops}"
 		end
 
 		sorted_stops
@@ -171,3 +174,39 @@ p "Sorted set at #{list_index}: #{sorted_stops}"
 		data["stop"]["stop_name"]
 	end
 end
+
+
+class SORoute
+	attr_accessor :route_id
+	attr_accessor :directions
+
+	def initialize
+		@directions = []
+	end
+
+	def to_json(*args)
+		{'route_id' => @route_id, 'directions' => @directions}.to_json(*args)
+	end
+end
+
+class SODirection
+	attr_accessor :direction_id
+	attr_accessor :stops
+
+	def initialize
+		@stops = []
+	end
+
+	def to_json(*args)
+		{'direction_id'=> @direction_id, 'stops'=>@stops}.to_json(*args)
+	end
+end
+
+class StopWriter
+	def write_stops_to_file(route_stops)
+		File.open("stop_order.json","w") do |f|
+		  f.write(JSON.pretty_generate(route_stops))
+		end
+	end
+end
+
