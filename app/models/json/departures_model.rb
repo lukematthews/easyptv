@@ -1,6 +1,5 @@
 class Departures
 	attr_accessor :departures
-
 	@public_holidays
 
 	def initialize
@@ -24,7 +23,7 @@ class Departures
 
 	def is_public_holiday(day)
 		found = false
-		keys = @public_holidays.each_key {
+		@public_holidays.each_key {
 			|key|
 			if (key.year == day.year && key.month == day.month && key.day == day.day)
 				found = true
@@ -35,7 +34,7 @@ class Departures
 
 	def getHoliday(day)
 		holiday = []
-		keys = @public_holidays.each { |key,value|
+		@public_holidays.each { |key,value|
 			if (key.year == day.year && key.month == day.month && key.day == day.day)
 				holiday[0] = value[0]
 				holiday[1] = key

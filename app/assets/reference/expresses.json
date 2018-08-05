@@ -1,0 +1,121 @@
+[
+	{
+		"route_id": 6,
+		"direction": 1,
+		"expresses": [
+			{
+				"key": "A",
+				"text": "Flinders Street via City Loop",
+				"stops": [
+					{
+						"start":26,
+						"end":31
+					}
+				]
+			},
+			{
+				"key": "B",
+				"text": "Flinders Street (direct)",
+				"stops": [
+				]
+			},
+			{
+				"key": "C",
+				"text": "Express between Cheltenham > Caulfield & Malvern > South Yarra",
+				"stops": [
+					{
+						"start":11,
+						"end":20
+					},
+					{
+						"start":21,
+						"end":25
+					}
+				]
+			},
+			{
+				"key": "D",
+				"text": "Express between Moorabbin > Caulfield & Malvern > South Yarra",
+				"stops": [
+					{
+						"start":14,
+						"end":20
+					},
+					{
+						"start":21,
+						"end":25
+					}
+				]
+			},
+			{
+				"key": "X",
+				"text": "",
+				"stops": [
+				]
+			},
+			{
+				"key": "Y",
+				"text": "",
+				"stops": [
+				]
+			},
+			{
+				"key": "Z",
+				"text": "",
+				"stops": [
+				]
+			},
+			{
+				"key": "N",
+				"text": "Night Train Service",
+				"stops": [
+				]
+			}
+		]
+	},
+	{
+		"route_id": 6,
+		"direction": 5,
+		"expresses": [
+			{
+				"key": "A",
+				"text": "Terminates at Caulfield Railway Station (Caulfield East)",
+				"stops": [
+				]
+			},
+			{
+				"key": "B",
+				"text": "Terminates at Moorabbin Railway Station (Moorabbin)",
+				"stops": [
+				]
+
+			},
+			{
+				"key": "C",
+				"text": "Terminates at Cheltenham Railway Station (Cheltenham)",
+				"stops": [
+				]
+			},
+			{
+				"key": "D",
+				"text": "Terminates at Mordialloc Railway Station (Mordialloc)",
+				"stops": [
+				]
+			},
+			{
+				"key": "E",
+				"text": "Terminates at Carrum Railway Station (Carrum)",
+				"stops": [
+				]
+
+			},
+			{
+				"key": "H",
+				"text": "Operates on Friday only",
+				"stops": [
+				]
+
+			}
+		]
+	}
+]

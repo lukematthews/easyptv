@@ -4,6 +4,7 @@ class TimetableController < ApplicationController
 	require 'timetable_controller_helper'
 	include TimetableControllerHelper
 
+	mattr_accessor :express_legends
 	helper_method :generate_title
 
 	@dayViewModelMF
@@ -16,10 +17,12 @@ class TimetableController < ApplicationController
 	@routeId
 	@stopId
 	@directionId
+	@legend
 
 	@route_maps
 	@bus_icons
 	@map_src
+	@@express_legends
 
 	@with_departures
 
@@ -29,6 +32,7 @@ class TimetableController < ApplicationController
 		@route_maps = JSON.parse(file)
 		file = File.read("app/assets/reference/bus_icons.json")
 		@bus_icons = JSON.parse(file)
+		@@express_legends = JSON.parse(File.read("app/assets/reference/expresses.json"))
 	end
 
 	def index
@@ -39,7 +43,9 @@ class TimetableController < ApplicationController
 		@stopId = params[:stop]
 		@directionId = params[:direction]
 
-		t = TimetableService.new
+		get_legend()
+
+		t = TimetableServiceExpress.new
 		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
 
 		setTimes(t, days)
@@ -65,6 +71,17 @@ class TimetableController < ApplicationController
 		render json: @map_src
 	end
 
+	def get_legend
+		# get the express legend from the legend reference 
+		# for the direction and route.
+		@legend = @@express_legends.select {|legend_item|
+			# puts "#{legend_item}"
+			legend_item["route_id"].to_s == @routeId.to_s &&
+			legend_item["direction"].to_s == @directionId.to_s
+		}
+		# puts "complete legend: #{@legend}"
+	end
+
 	def withDepartures
 		@routeTypeId = params[:route_type]
 		@routeId = params[:route]
@@ -73,7 +90,10 @@ class TimetableController < ApplicationController
 		# Destination is the stop id of where the arrival times and trip length are calculated to.
 		@destination = params[:destination]
 		@end_stop_id = params[:destination]
-		t = TimetableService.new
+
+		get_legend
+
+		t = TimetableServiceExpress.new
 		
 		@end_stop = t.getStopName(@routeTypeId, @destination)
 
@@ -127,7 +147,7 @@ class TimetableController < ApplicationController
 		end_stop_id = params[:end_stop]
 		runs = params[:runs]
 		# runs is a comma separated list of run_id's
-		t = TimetableService.new
+		t = TimetableServiceExpress.new
 		times = t.loadTimes(route_type_id, start_stop_id, end_stop_id, runs)
 		render json: times
 	end
@@ -136,7 +156,6 @@ class TimetableController < ApplicationController
 # t = TimetableService
 # days = [{"Day Key", [DayModel...]}]
 	def setTimes(t, days)
-
 		@routeName = t.routeName
 		@destination = t.directionName
 		@stop = t.stopName

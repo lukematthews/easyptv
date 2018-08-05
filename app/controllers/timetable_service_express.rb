@@ -1,6 +1,7 @@
-class TimetableService
+class TimetableServiceExpress
 
 	require 'Ptv_API'
+	# require_relative '../../lib/Ptv_API'
 	include PtvAPI
 
 	require 'date'
@@ -24,6 +25,13 @@ class TimetableService
 
 	@public_holidays
 
+	@stop_cache
+
+	@stops
+	@express_legend
+
+	@stops_for_route_direction
+
 # DayModel is setup on line 136.
 
 # we need to be able to return info on the public holidays in effect.
@@ -41,6 +49,11 @@ class TimetableService
 # These are constants
 		@devid = "3000522"
 		@key = 	"9b321181-e0b4-4e9d-b08a-5af3d26bb6fc"
+
+		stops_file = File.read("#{Rails.root}/lib/stop_order.json")
+		@stops = JSON.parse(stops_file)
+
+		@stop_cache = {}
 	end
 
 
@@ -102,7 +115,6 @@ class TimetableService
 	end
 
 	def getStopName(route_type, stop)
-p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
 		data = run("/v3/stops/#{stop}/route_type/#{route_type}?")
 		data["stop"]["stop_name"]
 	end
@@ -112,8 +124,9 @@ p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
 	end
 
 	def loadDeparturesToStop(route_type, route_id, stop, direction_id, end_stop)
-		# Once we get the departures, we can load the patterns for each departure (run), 
-		# this will give us the time the run will be stopping there.
+		# Once we get the departures, we can load the patterns for each
+	    # departure (run), this will give us the time the run will be
+	    # stopping there.
 
 		# I guess we will need to load the run/arrival time into TimeModel.
 		# Time: 43 min
@@ -122,9 +135,10 @@ p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
 		# Do we want to exclude the time or highlight it in another colour 
 		# if the service doesn't stop at the end stop?
 
-		# If we load the run_id into a set, we can load the patterns and determine 
-		# what time the run gets to the end_stop. To make sure we don't load too many patterns,
-		# store the run_id's into a set and only load the distinct runs/patterns
+		# If we load the run_id into a set, we can load 
+		# the patterns and determine what time the run gets to the end_stop. 
+		# To make sure we don't load too many patterns, store the run_id's
+		# into a set and only load the distinct runs/patterns
 
 		loadAll(route_type, route_id, stop, direction_id, end_stop, true)
 	end
@@ -134,7 +148,26 @@ p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
 		loadAll(route_type, route_id, stop, direction_id, 0, false)
 	end
 
+	def load_route_stops(route_id, direction_id)
+		route_stops = @stops.select { |route|
+			route["route_id"].to_s == route_id.to_s
+		}.first
+		directions = route_stops["directions"]
+		direction_stops = directions.select {|direction|
+			direction["direction_id"].to_s == direction_id.to_s
+		}.first
+		if !direction_stops.nil?
+			@stops_for_route_direction = direction_stops['stops']
+		else
+			@stops_for_route_direction = []
+		end
+	end
+
 	def loadAll(route_type, route_id, stop, direction_id, destination, loadTimes)
+
+		# Get all the stops for the route and direction.
+		load_route_stops(route_id, direction_id)
+
 		@route_type = route_type
 		@stop = stop
 		@direction_id = direction_id
@@ -191,7 +224,7 @@ p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
 			day.each do |day_data|
 				local = getDateFromLocalString(day_data.scheduled_departure_utc)
 
-p "#{day_data.scheduled_departure_utc} - #{local}"
+# p "#{day_data.scheduled_departure_utc} - #{local} x#{day_data.run_id}x"
 
 				time = local.to_time
 				# get the DayModel for the day.
@@ -212,6 +245,10 @@ p "#{day_data.scheduled_departure_utc} - #{local}"
 				day_model = days[day_name]
 				if day_model.nil?
 					day_model = DayModel.new
+					day_model.initialise_express_legend(
+						TimetableController.express_legends, 
+						route_id, 
+						direction_id)
 				end
 
 				day_model.day_name = day_name
@@ -219,8 +256,9 @@ p "#{day_data.scheduled_departure_utc} - #{local}"
 				if (times.nil?)
 					times = SortedSet.new
 				else
-					# This feels really unnatural - sorted set works on object instance,
-					# using a to_s which only has the time in it allows it to work
+					# This feels really unnatural - 
+					# sorted set works on object instance, using a to_s 
+					# which only has the time in it allows it to work
 
 					# This effectively serializes the time model as a string 
 					# so that it can be unique and sorted
@@ -240,6 +278,15 @@ p "#{day_data.scheduled_departure_utc} - #{local}"
 			end
 		end
 
+		days.each_value { |day_value|
+			# day_value will have the array of runs for each time
+			# (used in the arrivals view of the page)
+			# Go through each time and their runs to get the patterns,
+			# using the patterns, work out which stops are missed,
+			# this will then give us which times are express
+			calculate_expresses_for_day(route_type, route_id, day_value)
+			# puts "Expresses for #{day_value.name}: #{day_value.expresses}"
+		}
 		days
 		# build view model for timetable page.
 		# day: "Monday to Friday", am: (collection of hours, each hour contains its minutes), pm:
@@ -264,8 +311,49 @@ p "#{day_data.scheduled_departure_utc} - #{local}"
 
 	end
 
-	def loadDay(date)
+	def calculate_expresses_for_day(route_type, route_id, day_value)
+		# ok, given the day, iterate over all the runs. The runs is a hash of 
+		# time => [runs].
 
+		# p "runs for day? #{day_value.runs}"
+		puts "day: #{day_value}"
+		day_value.runs.each{ |key, value|			
+			expresses = Set.new
+			# "value" should be a comma seperated list of run_ids
+			value.each{|run|
+				expresses << calculate_express_for_run(route_type, key, run)
+				day_value.expresses[key] = expresses
+				# Create the express value for the run.
+				# express_value = ""
+				# day_value.express_values[key] = express_value
+				day_value
+			}
+		}
+	end
+
+	def calculate_express_for_run(route_type, time_key, run)
+		# Load the pattern.
+		uri = "/v3/pattern/run/#{run}/route_type/#{route_type}?"
+		data = run(uri)
+
+		# Iterate over the departures, looking for the stops. 
+		# Capture the departures for the start and end stop.
+		stops = []
+		data['departures'].map { |dep|
+			time = dep['scheduled_departure_utc']
+			stops << dep['stop_id'].to_i
+		}
+		
+		e = Express.new
+		e.stops_for_route = @stops_for_route_direction
+		e.stops = stops
+
+		e.find_and_compress
+
+		e.expresses
+	end
+
+	def loadDay(date)
 		formattedDate = CGI::escape(date.strftime("%Y-%m-%dT00:00"))
 		route_type_pattern = "route_type/#{@route_type}"
 		stop_pattern = "stop/#{@stop}"
@@ -301,6 +389,7 @@ p "#{day_data.scheduled_departure_utc} - #{local}"
 
 	def loadTimes(route_type, startStop, endStop, runs)
 
+p "#{route_type}, #{startStop}, #{endStop}, #{runs}"
 		# Runs is a comma separated id list... make it an array...
 		runs = runs.split(", ")
 

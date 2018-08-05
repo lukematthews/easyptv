@@ -54,7 +54,7 @@ module TimetableControllerHelper
 		# Get the route name, stop and destination name 
 		# from the timetable service using the parameters stored in the cookie.
 
-		t = TimetableService.new
+		t = TimetableServiceExpress.new
 		route_name = t.loadRouteDetails(cookie_values["route"])
 		stop_name = t.getStopName(cookie_values["route_type"], 
 			cookie_values["stop"])

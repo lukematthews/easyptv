@@ -1,8 +1,8 @@
 <% 
 	am = "AM"
 	pm = "PM"
-	amHours = (5..11).to_a
-	pmHours = (12..22).to_a 
+	amHours = (0..11).to_a
+	pmHours = (12..23).to_a 
 %>
 
 <% content_for :for_head do %>
@@ -118,7 +118,7 @@
             minutes.each do |minute|
             	if @with_departures == false
 %>
-					<span style="margin-left:10px;"><%= minute %></span>
+					<span style="margin-left:10px;"><%= minute %>
 <%
 				else
 %>
@@ -129,9 +129,13 @@
 							data-time="<%= dayModel.display_hour(hour)%>:<%= minute %><%= amPm %>" 
 							data-run_id="<%= dayModel.runForTime(hour, minute) %>">
 						<%= minute %>
-					</span>
+						<sub class="express_value"><%= dayModel.express_for_time(hour, minute)%></sub>
 <%
 				end
+%>
+					</span>
+
+<%
  			end 
 %>
 				</td>
@@ -376,7 +380,22 @@
 				on all public holidays except Good Friday and Christmas Day
 				<br/>
 				(2) Sunday timetable operates on Good Friday and 
-				Christmas Day<br/>
+				Christmas Day
+			</p>
+			<p>
+				<table>
+					<thead><tr><td colspan="2" class="key_heading">Key -</td></tr></thead>
+<% @legend.each {|legend_item|
+	legend_item["expresses"].each {|legend_express|
+%>
+					<tr><td><%= legend_express["key"] %></td><td><%= legend_express["text"] %></td></tr>
+
+<%		
+	}		
+}
+%>
+				</table>
+			</p><p>
 				All times are subject to alteration without notice.
 			</p>
 		</div>
