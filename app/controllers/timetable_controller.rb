@@ -45,7 +45,8 @@ class TimetableController < ApplicationController
 
 		get_legend()
 
-		t = TimetableServiceExpress.new
+		# t = TimetableServiceExpress.new
+		t = TimetableService.new
 		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
 
 		setTimes(t, days)
@@ -79,7 +80,6 @@ class TimetableController < ApplicationController
 			legend_item["route_id"].to_s == @routeId.to_s &&
 			legend_item["direction"].to_s == @directionId.to_s
 		}
-		# puts "complete legend: #{@legend}"
 	end
 
 	def withDepartures
@@ -93,7 +93,8 @@ class TimetableController < ApplicationController
 
 		get_legend
 
-		t = TimetableServiceExpress.new
+		# t = TimetableServiceExpress.new
+		t = TimetableService.new
 		
 		@end_stop = t.getStopName(@routeTypeId, @destination)
 
@@ -147,7 +148,8 @@ class TimetableController < ApplicationController
 		end_stop_id = params[:end_stop]
 		runs = params[:runs]
 		# runs is a comma separated list of run_id's
-		t = TimetableServiceExpress.new
+		# t = TimetableServiceExpress.new
+		t = TimetableService.new
 		times = t.loadTimes(route_type_id, start_stop_id, end_stop_id, runs)
 		render json: times
 	end

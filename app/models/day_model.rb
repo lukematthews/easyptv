@@ -157,7 +157,7 @@ puts express_legend_item["route_id"].to_s == route_id.to_s &&
 		# iterate over each of the legend items.
 		express_stops = ""
 
-		puts "Getting express for time #{create_time_key(hour, minute)}, expresses: #{time_expresses}"
+		# puts "Getting express for time #{create_time_key(hour, minute)}, expresses: #{time_expresses}"
 
 		time_expresses.each {|express|
 			puts "#{hour}:#{minute} - #{express}"
@@ -167,19 +167,19 @@ puts express_legend_item["route_id"].to_s == route_id.to_s &&
 				finish = express_item[:end].to_s
 				express_stops << start + "-" + finish + ", "
 			}
-		}
+		} unless time_expresses.nil?
 
 		express_display = ""
 		# Iterate over all the express key stops, if the express stops include
 		# 
 		@express_key_stops.each { |key, value|
 			# key = stops text, value = key to Display (A,C,D... etc.)
-puts "Getting express for time: legend_key: #{key}, Legend value: #{value}, stops for time: #{express_stops}"
+# puts "Getting express for time: legend_key: #{key}, Legend value: #{value}, stops for time: #{express_stops}"
 			if (key.length > 0) && (express_stops.include? key)
-puts "Express stops #{express_stops} includes #{key}, adding: #{value}"
+# puts "Express stops #{express_stops} includes #{key}, adding: #{value}"
 				express_display << value << " "
 			end
-		}
+		} unless @express_key_stops.nil?
 
 		express_display
 	end
