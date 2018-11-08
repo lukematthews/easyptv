@@ -14,11 +14,7 @@ class Route
     end
 
     def to_s
-    	output = ""
-    	if @route_number.to_s.empty? == false
-    		output = "#{@route_number} -"
-    	end
-    	output = "#{output} #{@route_name}"
-    	output
+    	output = @route_number.to_s.empty? ? "" : "#{@route_number} - "
+    	"#{output} #{@route_name}"
     end
 end
