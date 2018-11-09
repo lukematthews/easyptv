@@ -57,3 +57,5 @@ gem 'cookies_eu'
 ruby "2.5.3"
 
 gem "bootsnap", "~> 1.3"
+
+gem "figaro"
