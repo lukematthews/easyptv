@@ -83,4 +83,5 @@ production:
   # This needs to change to a prod database...
   database: easy-ptv_development
   username: easy_ptv
+  password: easy_ptv
   password: <%= ENV['LUKE-PTV_DATABASE_PASSWORD'] %>
