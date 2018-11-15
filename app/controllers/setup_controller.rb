@@ -4,36 +4,24 @@ class SetupController < ApplicationController
 
 	def index
 		service = SetupService.new
-		@modes =  service.modes
+		@modes =  RouteType.all
 		@routes = service.routes
 		render
 	end
 
-	# http://localhost:3000/setup/routes_for_mode?mode=4
 	def routes
-		@mode = params[:id]
-		service = SetupService.new
-		@routes = service.routes_for_mode(@mode)
-		render json: @routes
+		render json: SetupService.new.routes_for_mode(params[:id])
 	end
 
 	def stops
-		@mode = params[:id]
-		@route = params[:route]
-		# puts params
-		# puts "mode: {@mode}, route: #{@route}"
-		service = SetupService.new
-		@routes = service.stops_for_route(@route, @mode)
-		# puts @routes
-		render json: @routes
+		route_type_for_mode = RouteType.find_by(route_type: params[:id])
+		route = Route.where(route_type: route_type_for_mode).find_by(
+			route_id: params[:route])
+		render json: route.stops.sort{|x,y| x.stop_name <=> y.stop_name}
 	end
 
 	def directions
-		@route = params[:id]
-		service = SetupService.new
-		@directions = service.directions_for_route(@route)
-		puts @directions
-		render json: @directions
+		render json: SetupService.new.directions_for_route(params[:id])
 	end
 
 	def bus_operators

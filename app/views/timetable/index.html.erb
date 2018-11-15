@@ -103,6 +103,10 @@
 		</tr>
 <%
 		hours.each do |hour|
+			if dayModel.minutes_for_hour(hour).size == 0
+				# There are no times for this hour... skip it.
+				next
+			end
 			style = ""
 			if(dayModel.last_hour(hour))
 				style = "border-bottom: 1px solid black;"
@@ -307,7 +311,7 @@
 %>
 	
 <%
-	if @dayViewModelMF.nil? 
+	if @days[RunDay::MF].nil? 
 		# No services for day, print a nice message.
 		style = table_width
 		print_no_times("Monday to Friday", style)
@@ -316,9 +320,9 @@
 %>
 		<table class="times" style="<%= style %>">
 			<tr class="day"><td colspan=2 style="padding: 2px;">
-				<%= @dayViewModelMF.name %></td></tr>
-			<% print_times(am, amHours, @dayViewModelMF ) %>
-			<% print_times(pm, pmHours, @dayViewModelMF ) %>
+				<%= @days[RunDay::MF].day_name %></td></tr>
+			<% print_times(am, amHours, @days[RunDay::MF] ) %>
+			<% print_times(pm, pmHours, @days[RunDay::MF] ) %>
 		</table>
 <%
 	end
@@ -330,7 +334,7 @@
 <!-- Saturday -->
 	<div class="saturday,day,weekend">
 <% 
-	if @dayViewModelSAT.nil?
+	if @days[RunDay::SAT].nil?
 		# No services for day, print a nice message.
 		print_no_times("Saturday", "")
 	else
@@ -338,11 +342,11 @@
 		<table class="times">
 			<tr class="day">
 				<td colspan=2 style="padding: 2px;">
-					<%= @dayViewModelSAT.name %>
+					<%= @days[RunDay::SAT].day_name %>
 				</td></tr>
 <% 
-		print_times(am, amHours, @dayViewModelSAT)
-		print_times(pm, pmHours, @dayViewModelSAT)
+		print_times(am, amHours, @days[RunDay::SAT])
+		print_times(pm, pmHours, @days[RunDay::SAT])
 %>
 		</table>
 <%
@@ -353,16 +357,16 @@
 <!-- Sunday -->
 	<div class="sunday,day,weekend">
 <%
-	if @dayViewModelSUN.nil?
+	if @days[RunDay::SUN].nil?
 		print_no_times("Sunday", "")
 	else
 %>
 		<table class="times">
 			<tr class="day"><td colspan=2 style="padding: 2px;">
-				<%= @dayViewModelSUN.name %></td></tr>
+				<%= @days[RunDay::SUN].day_name %></td></tr>
 			<% 
-				print_times(am, amHours, @dayViewModelSUN)
-				print_times(pm, pmHours, @dayViewModelSUN)
+				print_times(am, amHours, @days[RunDay::SUN])
+				print_times(pm, pmHours, @days[RunDay::SUN])
 			%>
 		</table>
 <%

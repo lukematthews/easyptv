@@ -56,6 +56,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'cookies_eu'
 ruby "2.5.1"
 
-gem "bootsnap", "~> 1.3"
+gem 'bootsnap', require: false
 
 gem "figaro"

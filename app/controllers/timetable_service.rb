@@ -9,40 +9,18 @@ class TimetableService
 	require 'net/http'
 	require 'openssl'
 
-	require_relative '../models/json/departure_model'
-	require_relative '../models/json/departures_model'
-	require_relative '../models/json/pattern_model'
-
 	@route_type
 	@stop
 	@direction_id
-
-	@devid
-	@key
 
 	@deps
 
 	@public_holidays
 
-# DayModel is setup on line 136.
-
-# we need to be able to return info on the public holidays in effect.
-
 	def initialize
-
 		@public_holidays = []
 		@deps = Departures.new
-
-# These need to be passed in as URL parameters
-		@route_type = "2"
-		@stop = "12400"
-		@direction_id = "222"
-
-# These are constants
-		@devid = "3000522"
-		@key = 	"9b321181-e0b4-4e9d-b08a-5af3d26bb6fc"
 	end
-
 
 	def routeName()
 		@routeName
@@ -60,12 +38,11 @@ class TimetableService
 		@public_holidays
 	end
 
-	def loadRouteDetails(route_id)
-		data = run("/v3/routes/#{route_id}?")
-		@routeName = data["route"]["route_name"]
-		@routeTypeId = data["route"]["route_type"]
-		# WTF? Not sure what this was for again.
-		routeNumber = data["route"]["route_number"]
+	def loadRouteDetails(route_api_id)
+		route = Route.find_by(route_id: route_api_id)
+		@routeName = route.route_name
+		@routeTypeId = route.route_type.route_type
+		routeNumber = route.route_number
 
 		# Train: "#{routeName} Line"
 		# Tram: "Route #{routeNumber}"
@@ -87,28 +64,21 @@ class TimetableService
 	end
 
 	def getDirectionDetails(route_type, route_id, direction_id)
-		direction = {}
-		data = run("/v3/directions/#{direction_id}?")
-		directions = data["directions"]
-		directions.each do |d|
-			r = d["route_id"]
-			rt = d["route_type"]
-			if (r.to_s == route_id.to_s && rt.to_s == route_type.to_s)
-				direction[:route] = r
-				direction[:direction_name] = d["direction_name"]
-			end
-		end
-		direction
+		dir = Direction.where(
+			direction_id: direction_id, 
+			route_type: RouteType.find_by(route_type: route_type), 
+			route: Route.find_by(route_id: route_id)).first
+		Hash[:route => dir.route.route_id, 
+				:direction_name => dir.direction_name]
 	end
 
-	def getStopName(route_type, stop)
-# p "Called getStopName: route_type=#{route_type}, stop=#{stop}"
-		data = run("/v3/stops/#{stop}/route_type/#{route_type}?")
-		data["stop"]["stop_name"]
+	def getStopName(route_type, stop_id)
+		rt = RouteType.find_by(route_type: route_type)
+		Stop.where(stop_id: stop_id, route_type: rt).first.stop_name
 	end
 
-	def loadStopName(route_type, stop)
-		@stopName = getStopName(route_type, stop)
+	def loadStopName(route_type, stop_id)
+		@stopName = getStopName(route_type, stop_id)
 	end
 
 	def loadDeparturesToStop(route_type, route_id, stop, direction_id, end_stop)
@@ -165,7 +135,7 @@ class TimetableService
 		@deps.departures = []
 		days_to_load = (0..7).to_a
 
-		days_to_load.each do |day|
+		days_to_load.each { |day|
 			dayToLoad = now+day
 			local_day = getDepartureDateLocal(dayToLoad)
 
@@ -180,15 +150,17 @@ class TimetableService
 			# Or, if it's a SAT/SUN and a public holiday, add it. 
 			if (!isPublicHoliday || (isPublicHoliday && sat_or_sun))
 				# Load the days timetable and load it into the departures array
-				@deps.departures << loadDay(dayToLoad)
+				departure_times = loadDay(dayToLoad)
+				puts "Adding departure time: #{departure_times}"
+				@deps.departures << departure_times
 			end
-		end
+		}
 
 		days = Hash.new
 		# days {"M_F" times {hour, [minutes]}], "SAT"..., "SUN"...}
 		# iterate through all the departures...
-		@deps.departures.each do |day|
-			day.each do |day_data|
+		@deps.departures.each { |day|
+			day.each { |day_data|
 				local = getDateFromLocalString(day_data.scheduled_departure_utc)
 
 # p "#{day_data.scheduled_departure_utc} - #{local}"
@@ -237,8 +209,8 @@ class TimetableService
 					day_model.runs[time_model.to_s] = SortedSet.new
 				end
 				day_model.runs[time_model.to_s] << day_data.run_id
-			end
-		end
+			}
+		}
 
 		days
 		# build view model for timetable page.
@@ -267,32 +239,43 @@ class TimetableService
 	def loadDay(date)
 
 		formattedDate = CGI::escape(date.strftime("%Y-%m-%dT00:00"))
-		route_type_pattern = "route_type/#{@route_type}"
-		stop_pattern = "stop/#{@stop}"
-		date_pattern = "date_utc=#{formattedDate}"
-		direction_pattern = "direction_id=#{@direction_id}"
+		# route_type_pattern = "route_type/#{@route_type}"
+		# stop_pattern = "stop/#{@stop}"
+		# date_pattern = "date_utc=#{formattedDate}"
+		# direction_pattern = "direction_id=#{@direction_id}"
 
-		uri = "/v3/departures/#{route_type_pattern}/#{stop_pattern}?#{direction_pattern}&#{date_pattern}&"
+		# uri = "/v3/departures/#{route_type_pattern}/#{stop_pattern}?#{direction_pattern}&#{date_pattern}&"
 
 		# This is calling module methods
 		# data = parsed_json(execute(uri))
-		data = run(uri)
+		# data = run(uri)
 
-		newDepartures = []
+		routeType = 
+		stop = Stop.where(
+				route_type: RouteType.find_by(route_type: @route_type), 
+				stop_id: @stop).first
+		direction = Direction.find_by(direction_id: @direction_id)
+		departures = Departure.where(
+			route: stop.route,
+			stop: stop,
+			direction: direction)
 
-		data['departures'].map { |dep|
-			if dep['route_id'] == @route_id
-				d = Departure.new
-				d.stop_id = dep['stop_id']
-				d.route_id = dep['route_id']
-				d.run_id = dep['run_id']
-				d.direction_id = dep['direction_id']
-				d.scheduled_departure_utc = dep['scheduled_departure_utc']
-				newDepartures << d
-			end
-		}
+		puts "Loaded departures: #{departures.size}"
 
-		newDepartures
+		return departures
+		# newDepartures = []
+		# data['departures'].map { |dep|
+		# 	if dep['route_id'] == @route_id
+		# 		# d = Departure.new
+		# 		# d.stop_id = dep['stop_id']
+		# 		# d.route_id = dep['route_id']
+		# 		# d.run_id = dep['run_id']
+		# 		# d.direction_id = dep['direction_id']
+		# 		# d.scheduled_departure_utc = dep['scheduled_departure_utc']
+		# 		newDepartures << d
+		# 	end
+		# }
+		# newDepartures
 	end
 
 	def departures
@@ -447,6 +430,7 @@ class TimetableService
 		local = departureDate +	 (utc_offset/24.0)
 		local
 	end
+
 
 end
 

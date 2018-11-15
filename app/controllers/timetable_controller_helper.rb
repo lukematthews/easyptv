@@ -49,28 +49,41 @@ module TimetableControllerHelper
 		search_hash
 	end
 
+	def get_stop_name(stop_id)
+		Stop.find_by(stop_id: stop_id).stop_name
+	end
+
+	def get_route_name(route_id)
+		Route.find_by(route_id: route_id).route_name
+	end
+
+	def get_direction_name(route_type, route, direction)
+		Direction.find_by(
+			route_type: RouteType.find_by(route_type: route_type),
+			route: Route.find_by(route_id: route)
+			).direction_name
+	end
+
 	def generate_title_for_cookie(cookie_values)
 
 		# Get the route name, stop and destination name 
 		# from the timetable service using the parameters stored in the cookie.
 
 		# t = TimetableServiceExpress.new
-		t = TimetableService.new
-		route_name = t.loadRouteDetails(cookie_values["route"])
-		stop_name = t.getStopName(cookie_values["route_type"], 
-			cookie_values["stop"])
+		t = TimetableServiceModel.new
+		route_name = Route.find_by(route_id: cookie_values["route"]).route_name
+
+		stop_name = Stop.find_by(stop_id: cookie_values["stop"]).stop_name
 		if cookie_values["direction"].nil? == false
-			direction = t.getDirectionDetails(
+			direction_name = get_direction_name(
 				cookie_values["route_type"], 
 				cookie_values["route"], 
 				cookie_values["direction"])
-			direction_name = direction[:direction_name]
 			if cookie_values["search_type"].eql? "timetable"
 				going_to = "#{direction_name}"
 				page = "Timetable"
 			else
-				going_to = t.getStopName(cookie_values["route_type"], 
-					cookie_values["destination"])
+				going_to = get_stop_name(cookie_values["destination"])
 				page = "Arrival Times"
 			end
 			title = "#{stop_name} to #{going_to} - (#{route_name}): #{page}"

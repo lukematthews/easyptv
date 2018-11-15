@@ -7,9 +7,9 @@ class TimetableController < ApplicationController
 	mattr_accessor :express_legends
 	helper_method :generate_title
 
-	@dayViewModelMF
-	@dayViewModelSAT
-	@dayViewModelSUN
+	@days
+	# This is a hash of RunDay::(day type) => runDay
+	# the runDay then has the times.
 
 	@publicHolidays
 	@has_public_holiday
@@ -43,13 +43,27 @@ class TimetableController < ApplicationController
 		@stopId = params[:stop]
 		@directionId = params[:direction]
 
-		get_legend()
+		route = Route.find_by(route_id: @routeId)
+		stop = Stop.find_by(stop_id: @stopId, route: route)
+		direction = Direction.find_by(direction_id: @directionId, route_id: route.id)
+
+		get_legend
+
+		stop_order = StopOrder.find_by(direction: direction, route: route, stop: stop)
+		next_stop_order = StopOrder.find_by(direction: direction, route: route, order: stop_order.order+1)
+		previous_stop_order = StopOrder.find_by(direction: direction, route: route, order: stop_order.order-1)
+
+		@previous_stop = !@previous_stop_order.nil? ? @previous_stop_order.stop : nil
+		@next_stop = !@next_stop_order.nil? ? @next_stop_order.stop : nil
 
 		# t = TimetableServiceExpress.new
-		t = TimetableService.new
-		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
+		# t = TimetableService.new
+		# days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
 
-		setTimes(t, days)
+		t = TimetableServiceModel.new
+		@days = t.loadDepartures(route, stop, direction)
+
+		setTimes(t, @days)
 
 		setPageClasses()
 
@@ -58,9 +72,10 @@ class TimetableController < ApplicationController
 		saveCookie("timetable")
 
 		# Get the map image url.
-		@map_src = @route_maps[@routeId]["map_url"]
+		@map_src = route.map_url
 
 		@with_departures = false
+
 
 		render 
 	end
@@ -91,16 +106,21 @@ class TimetableController < ApplicationController
 		@destination = params[:destination]
 		@end_stop_id = params[:destination]
 
+		route = Route.find_by(route_id: @routeId)
+		stop = Stop.find_by(stop_id: @stopId)
+		direction = Direction.find_by(direction_id: @directionId, route_id: route.id)
+		end_stop = Stop.find_by(stop_id: @end_stop_id)
 		get_legend
 
 		# t = TimetableServiceExpress.new
-		t = TimetableService.new
+		t = TimetableServiceModel.new
 		
-		@end_stop = t.getStopName(@routeTypeId, @destination)
+		# @end_stop = t.getStopName(@routeTypeId, @destination)
+		@end_stop = Stop.find_by(stop_id: @stopId)
 
-		days = t.loadDeparturesToStop(@routeTypeId, @routeId, @stopId, @directionId, @end_stop)
+		@days = t.loadDeparturesToStop(route, stop, direction, end_stop)
 
-		setTimes(t, days)
+		setTimes(t, @days)
 
 		setPageClasses()
 
@@ -122,7 +142,7 @@ class TimetableController < ApplicationController
 		@stopId = params[:stop]
 		@directionId = params[:direction]
 
-		t = TimetableService.new
+		t = TimetableServiceModel.new
 		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
 
 		setTimes(t, days)
@@ -158,16 +178,12 @@ class TimetableController < ApplicationController
 # t = TimetableService
 # days = [{"Day Key", [DayModel...]}]
 	def setTimes(t, days)
-		@routeName = t.routeName
-		@destination = t.directionName
-		@stop = t.stopName
+		@routeName = t.route_name
+		@destination = t.direction_name
+		@stop = t.stop_name
 
-		@dayViewModelMF = days["Monday to Friday"]
-		@dayViewModelSAT = days["Saturday"]
-		@dayViewModelSUN = days["Sunday"]
-		
-		@publicHolidays = t.publicHolidays
-		@has_public_holiday = @publicHolidays.length > 0
+		@publicHolidays = t.public_holidays
+		@has_public_holiday = @publicHolidays.size > 0
 
 	end
 
