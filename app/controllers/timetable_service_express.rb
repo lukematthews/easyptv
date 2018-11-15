@@ -10,10 +10,6 @@ class TimetableServiceExpress
 	require 'net/http'
 	require 'openssl'
 
-	require_relative '../models/json/departure_model'
-	require_relative '../models/json/departures_model'
-	require_relative '../models/json/pattern_model'
-
 	@route_type
 	@stop
 	@direction_id
