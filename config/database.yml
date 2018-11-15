@@ -82,5 +82,15 @@ production:
   <<: *default
   # This needs to change to a prod database...
   database: easy-ptv_development
+
+  # Connect on a TCP socket. Omitted by default since the client uses a
+  # domain socket that doesn't need configuration. Windows does not have
+  # domain sockets, so uncomment these lines.
+  host: <%= Figaro.env.db_host %>
+
+  # The TCP port the server listens on. Defaults to 5432.
+  # If your server runs on a different port number, change accordingly.
+  port: <%= Figaro.env.db_port %>
+
   username: easy_ptv
   password: easy_ptv

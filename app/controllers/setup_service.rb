@@ -23,7 +23,6 @@ class SetupService
 	end
 
 	def routes_for_mode(mode)
-		# Route.where(route_type_api_id: mode).sort &@route_sort
 		RouteType.find_by(route_type: mode).routes.sort &@route_sort
 	end		
 
