@@ -5,13 +5,8 @@ class MapsController < ApplicationController
 	require 'json'
 	require 'open-uri'
 
-	require_relative '../models/json/route_type_model'
-	require_relative '../models/json/route_model'
-
-
 	def index
 		modes = RouteType.all
-
 		route_type_names = {
 			0 => "metropolitan-trains",
 			1 => "metropolitan-trams",
