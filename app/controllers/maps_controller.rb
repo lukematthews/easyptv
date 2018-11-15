@@ -10,15 +10,7 @@ class MapsController < ApplicationController
 
 
 	def index
-		modes = []
-		data = run("/v3/route_types?")
-		data["route_types"].each do |route_type|
-			r = RouteType.new
-			r.route_type_name = route_type["route_type_name"]
-			r.route_type = route_type["route_type"]
-			modes << r
-		end
-		modes
+		modes = RouteType.all
 
 		route_type_names = {
 			0 => "metropolitan-trains",
@@ -28,23 +20,10 @@ class MapsController < ApplicationController
 			4 => "night-bus",
 		}
 
-		routes = []
-		data = run("/v3/routes?")
-		data["routes"].each do |route|
-			r = Route.new
-			r.route_type = route["route_type"]
-			r.route_id = route["route_id"]
-			r.route_name = route["route_name"]
-			r.route_number = route["route_number"]
-			r.display_name = r.to_s
-			routes << r
-		end
-		routes = routes.sort {|x,y| x.display_name <=> y.display_name }
+		routes = Route.all.sort {|x,y| x.display_name <=> y.display_name }
 
 		# Now for the fun part. For each route, generate the url.
 		# https://www.ptv.vic.gov.au/getting-around/maps/(metropolitan-buses)(route_type)/view/(3438)(route_id)/
-
-		# view_data = []
 
 		view_data = {}
 
@@ -73,26 +52,5 @@ p "MAP SRC: #{map_url}"
 			view_data[route.route_id] = {:route_type_name => route_type_name, :url => url, :route_id => route.route_id, :map_url => map_url}
 		}
 		render json: view_data
-	end
-
-	def map_for_route
-		# Get the map url for the given route id
-
-	end
-
-	def load_route
-		routes = []
-		data = run("/v3/routes?")
-		data["routes"].each do |route|
-			r = Route.new
-			r.route_type = route["route_type"]
-			r.route_id = route["route_id"]
-			r.route_name = route["route_name"]
-			r.route_number = route["route_number"]
-			r.display_name = r.to_s
-			routes << r
-		end
-		routes = routes.sort {|x,y| x.display_name <=> y.display_name }
-		
 	end
 end
