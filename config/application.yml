@@ -19,5 +19,5 @@ test:
   dev_db_port: "5432"
 
 production:
-  db_host: "203.56.129.205"
+  db_host: "203.56.130.150"
   db_port: "221"
