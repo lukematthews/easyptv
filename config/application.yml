@@ -10,13 +10,17 @@
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
+# For dev at home, uncomment this and comment out the development settings.
+# db_host: "192.168.20.48"
+# db_port: "5432"
+
 development:
-  dev_db_host: "192.168.20.48"
-  dev_db_port: "5432"
+  db_host: "203.56.130.150"
+  db_port: "221"
 
 test:
-  dev_db_host: "192.168.20.48"
-  dev_db_port: "5432"
+  # dev_db_host: "192.168.20.48"
+  # dev_db_port: "5432"
 
 production:
   db_host: "203.56.130.150"
