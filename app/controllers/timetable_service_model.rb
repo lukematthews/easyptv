@@ -27,9 +27,9 @@ class TimetableServiceModel
 		# route_type, route, stop, direction should all be activerecords.
 		days = RunDay.where(route: route, stop: stop, direction: direction)
 		# create a hash using the day_name as the key.
-		deperatures = {}
+		departures = {}
 		days.each {|day|
-			deperatures[day.day_name] = day
+			departures[day.day_name] = day
 		}
 
 		# ok, we've got the run_days which have got the times... now.
@@ -39,7 +39,7 @@ class TimetableServiceModel
 
 		
 
-		return deperatures
+		return departures
 	end
 
 	def process_public_holidays
