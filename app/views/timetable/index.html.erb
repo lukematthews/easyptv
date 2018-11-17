@@ -7,7 +7,7 @@
 
 <% content_for :for_head do %>
 	<%= stylesheet_link_tag "timetable" %>
-	<title><%= generate_title(@stop, @destination, @routeName) %></title>
+	<title><%= generate_title(@start_stop, @end_stop, @route.route_name) %></title>
 	<script>
 		$(document).ready(function() {
 			$("#spinner").hide();
@@ -133,7 +133,7 @@
 							data-time="<%= dayModel.display_hour(hour)%>:<%= minute %><%= amPm %>" 
 							data-run_id="<%= dayModel.runForTime(hour, minute) %>">
 						<%= minute %>
-						<sub class="express_value"><%= dayModel.express_for_time(hour, minute)%></sub>
+						<sub class="express_value"></sub>
 <%
 				end
 %>
@@ -268,16 +268,16 @@
 	<tr>
 		<td class="<%= @stopClass %>" colspan=2>
 <% if @with_departures == true %>
-			<span id="stop_name"><%= @stop %></span> to 
-			<span id="end_stop_name"><%= @end_stop %></span>
+			<span id="stop_name"><%= @start_stop.stop_name %></span> to 
+			<span id="end_stop_name"><%= @end_stop.stop_name %></span>
 <% else %>
 			<%= @stop %>
 <% end %>
 		</td>
 	</tr>
 	<tr>
-		<td class="route"><%= @routeName %></td>
-		<td class="destination"><%= @destination %></td>
+		<td class="route"><%= @route.display_name %></td>
+		<td class="destination"><%= @end_stop.stop_name %></td>
 	</tr>
 </table>
 <!-- Inset the body content 10px from the titles -->

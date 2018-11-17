@@ -111,7 +111,8 @@ class TimetableServiceModel
 
 
 		# Pattern is the object to be returned in json.
-		travel_time = PatternModel.new
+		# travel_time = PatternModel.new
+		travel_time = TravelTime.new
 
 		# Departure time:
 		travel_time.departure = departure.strftime("%l:%M%P")
@@ -135,5 +136,23 @@ class TimetableServiceModel
 		end
 
 		travel_time
+	end
+
+	def format_duration(duration)
+		seconds = 86400*duration
+		one_hour = 60*60
+		time = Time.at(seconds).utc
+		format_string = "%-H hours %-M minutes"
+		# Is the duration less than an hour?
+		if (seconds < one_hour) 
+			format_string = "%-M minutes"		
+		elsif (seconds < one_hour + 60)
+			format_string = "%-H hour"
+		elsif seconds < one_hour + (60*2)
+			format_string = "%-H hour %-M minute"
+		else
+			format_string = "%-H hours %-M minutes"		
+		end
+		time.strftime(format_string)		
 	end
 end

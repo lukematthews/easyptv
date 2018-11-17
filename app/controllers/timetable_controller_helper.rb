@@ -92,7 +92,9 @@ module TimetableControllerHelper
 	end
 
 	def generate_title(stop, destination, route_name)
-		"#{stop} to #{destination} (#{route_name})"
+		start_stop = stop.nil? ? "" : stop.stop_name
+		end_stop = destination.nil? ? "" : destination.stop_name
+		"#{start_stop} to #{end_stop} (#{route_name})"
 	end
 	
 	def generate_url(cookie_values)

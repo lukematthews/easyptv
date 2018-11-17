@@ -35,7 +35,7 @@ class TimetableController < ApplicationController
 		@@express_legends = JSON.parse(File.read("app/assets/reference/expresses.json"))
 	end
 
-	def index
+	def render_timetable(with_times)
 		# This should really be using ids instead of names.
 		# using ids means we can get the names from the api (similar to the setup page)
 		@routeTypeId = params[:route_type]
@@ -43,41 +43,57 @@ class TimetableController < ApplicationController
 		@stopId = params[:stop]
 		@directionId = params[:direction]
 
-		route = Route.find_by(route_id: @routeId)
-		stop = Stop.find_by(stop_id: @stopId, route: route)
-		direction = Direction.find_by(direction_id: @directionId, route_id: route.id)
+		# Destination is the stop id of where the arrival times and trip length are calculated to.
+		@destination = params[:destination]
+		@end_stop_id = params[:destination]
+
+
+		@route = Route.find_by(route_id: @routeId)
+
+		@start_stop = Stop.find_by(stop_id: @stopId, route: @route)
+		direction = Direction.find_by(direction_id: @directionId, route_id: @route.id)
+		@end_stop = Stop.find_by(stop_id: @destination)
 
 		get_legend
 
-		stop_order = StopOrder.find_by(direction: direction, route: route, stop: stop)
-		next_stop_order = StopOrder.find_by(direction: direction, route: route, order: stop_order.order+1)
-		previous_stop_order = StopOrder.find_by(direction: direction, route: route, order: stop_order.order-1)
+		stop_order = StopOrder.find_by(direction: direction, route: @route, stop: @start_stop)
+		next_stop_order = StopOrder.find_by(direction: direction, route: @route, order: stop_order.order+1)
+		previous_stop_order = StopOrder.find_by(direction: direction, route: @route, order: stop_order.order-1)
 
 		@previous_stop = !@previous_stop_order.nil? ? @previous_stop_order.stop : nil
 		@next_stop = !@next_stop_order.nil? ? @next_stop_order.stop : nil
 
-		# t = TimetableServiceExpress.new
-		# t = TimetableService.new
-		# days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
+		@routeTypeId = params[:route_type]
+		@routeId = params[:route]
+		@stopId = params[:stop]
+		@directionId = params[:direction]
 
 		t = TimetableServiceModel.new
-		@days = t.loadDepartures(route, stop, direction)
-
+		if with_times.eql? :plain
+			@days = t.loadDepartures(@route, @start_stop, direction)
+			@map_src = @route.map_url
+			@with_departures = false
+			saveCookie("timetable")
+		elsif with_times.eql? :departures
+			@days = t.loadDeparturesToStop(@route, @start_stop, direction, @end_stop)
+			@map_src = @route_maps[@routeId]["map_url"]
+			@with_departures = true
+			saveCookie("arrivals")
+		end
 		setTimes(t, @days)
 
 		setPageClasses()
 
-		# Save this as the first search and move the others down the list.
-		# If this is already in the list, remove the existing one and have this at the top.
-		saveCookie("timetable")
-
-		# Get the map image url.
-		@map_src = route.map_url
-
-		@with_departures = false
-
-
 		render 
+	end
+
+
+	def index
+		render_timetable(:plain)
+	end
+
+	def withDepartures
+		render_timetable(:departures)
 	end
 
 	def route_map
@@ -97,50 +113,10 @@ class TimetableController < ApplicationController
 		}
 	end
 
-	def withDepartures
-		@routeTypeId = params[:route_type]
-		@routeId = params[:route]
-		@stopId = params[:stop]
-		@directionId = params[:direction]
-		# Destination is the stop id of where the arrival times and trip length are calculated to.
-		@destination = params[:destination]
-		@end_stop_id = params[:destination]
-
-		route = Route.find_by(route_id: @routeId)
-		stop = Stop.find_by(stop_id: @stopId)
-		direction = Direction.find_by(direction_id: @directionId, route_id: route.id)
-		end_stop = Stop.find_by(stop_id: @end_stop_id)
-		get_legend
-
-		# t = TimetableServiceExpress.new
-		t = TimetableServiceModel.new
-		
-		# @end_stop = t.getStopName(@routeTypeId, @destination)
-		@end_stop = Stop.find_by(stop_id: @stopId)
-
-		@days = t.loadDeparturesToStop(route, stop, direction, end_stop)
-
-		setTimes(t, @days)
-
-		setPageClasses()
-
-		saveCookie("arrivals")
-
-		# Get the map image url.
-		@map_src = @route_maps[@routeId]["map_url"]
-
-		@with_departures = true
-
-		render :index
-	end
 
 	def bootstrap
 		# This should really be using ids instead of names.
 		# using ids means we can get the names from the api (similar to the setup page)
-		@routeTypeId = params[:route_type]
-		@routeId = params[:route]
-		@stopId = params[:stop]
-		@directionId = params[:direction]
 
 		t = TimetableServiceModel.new
 		days = t.loadDepartures(@routeTypeId, @routeId, @stopId, @directionId)
@@ -169,7 +145,7 @@ class TimetableController < ApplicationController
 		runs = params[:runs]
 		# runs is a comma separated list of run_id's
 		# t = TimetableServiceExpress.new
-		t = TimetableService.new
+		t = TimetableServiceModel.new
 		times = t.loadTimes(route_type_id, start_stop_id, end_stop_id, runs)
 		render json: times
 	end

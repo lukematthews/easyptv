@@ -95,8 +95,8 @@ class TimetableService
 		# If we load the run_id into a set, we can load the patterns and determine 
 		# what time the run gets to the end_stop. To make sure we don't load too many patterns,
 		# store the run_id's into a set and only load the distinct runs/patterns
-
-		loadAll(route_type, route_id, stop, direction_id, end_stop, true)
+		start_stop = stop
+		loadAll(route_type, route_id, start_stop, direction_id, end_stop, true)
 	end
 
 	#"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
