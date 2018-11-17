@@ -277,7 +277,7 @@
 	</tr>
 	<tr>
 		<td class="route"><%= @route.display_name %></td>
-		<td class="destination"><%= @end_stop.stop_name %></td>
+		<td class="destination"><%= @end_stop.nil? ? "" : @end_stop.stop_name %></td>
 	</tr>
 </table>
 <!-- Inset the body content 10px from the titles -->

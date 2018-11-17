@@ -44,15 +44,17 @@ class TimetableController < ApplicationController
 		@directionId = params[:direction]
 
 		# Destination is the stop id of where the arrival times and trip length are calculated to.
-		@destination = params[:destination]
-		@end_stop_id = params[:destination]
+		if with_times.eql? :departures
+			@destination = params[:destination]
+			@end_stop_id = params[:destination]
+			@end_stop = Stop.find_by(stop_id: @destination)
+		end
 
 
 		@route = Route.find_by(route_id: @routeId)
 
 		@start_stop = Stop.find_by(stop_id: @stopId, route: @route)
 		direction = Direction.find_by(direction_id: @directionId, route_id: @route.id)
-		@end_stop = Stop.find_by(stop_id: @destination)
 
 		get_legend
 
